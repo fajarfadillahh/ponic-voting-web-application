@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 // import material-components
@@ -10,12 +11,12 @@ export default function Navbar() {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-[1440px] bg-white">
       <div className="container flex h-24 items-center justify-between">
-        <div className="inline-flex items-center gap-2">
+        <Link href="/" className="inline-flex items-center gap-2">
           <Image src="/assets/icon.svg" alt="icon" width={36} height={36} />
           <span className="text-[22px] font-extrabold text-gray-900">
             Ponic<span className="text-pink-500">.</span>
           </span>
-        </div>
+        </Link>
 
         <div className="inline-flex items-center gap-4">
           {/* <span className="font-semibold text-gray-900">Fajar Fadillah A</span> */}
