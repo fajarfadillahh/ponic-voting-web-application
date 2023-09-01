@@ -10,7 +10,7 @@
 @layer components {
   /* section class */
   .section-title {
-    @apply mb-3 text-[42px] font-extrabold text-gray-900;
+    @apply mb-3 text-[42px] font-extrabold capitalize text-gray-900;
   }
   .section-text {
     @apply text-[16px] font-medium leading-[175%] text-gray-600;
