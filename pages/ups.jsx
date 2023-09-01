@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -8,24 +7,21 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 
-export default function NotFound() {
-  const router = useRouter();
-
+export default function SomethingWrong() {
   return (
     <>
       <Head>
-        <title>Oups.. halaman yang kamu cari tidak ditemuka.</title>
+        <title>Sepertinya telah terjadi kesalahan!</title>
       </Head>
 
       <Layout>
-        {/* ==== hero section ==== */}
         <section className="pb-16 pt-40">
           <div className="container grid gap-12">
             <Image
-              src="/assets/img-2.svg"
+              src="/assets/img-3.svg"
               alt="hero img"
-              width={500}
-              height={300}
+              width={350}
+              height={395}
               className="justify-self-center"
             />
 
@@ -34,15 +30,16 @@ export default function NotFound() {
                 variant="h1"
                 className="mb-3 font-extrabold capitalize text-gray-900"
               >
-                Opsss, Halaman gak ketemu 😲
+                Hmm, ada yang salah deh 🤔
               </Typography>
               <Typography
                 variant="paragraph"
                 className="mb-8 font-medium text-gray-600"
               >
-                Halaman yang kamu cari gak ketemu nih. Pastiin URL yang
+                Sepertinya terjadi kesalahan, silakan refresh/muat ulang halaman
+                ini
                 <br />
-                kamu masukin udah bener yahh.
+                atau kembali ke halaman utama.
               </Typography>
               <Button
                 size="lg"
