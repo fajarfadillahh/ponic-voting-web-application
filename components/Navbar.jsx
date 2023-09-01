@@ -15,7 +15,7 @@ export default function Navbar() {
         </div>
 
         <div className="inline-flex items-center gap-4">
-          <span className="font-semibold text-gray-900">Fajar Fadillah A</span>
+          {/* <span className="font-semibold text-gray-900">Fajar Fadillah A</span> */}
           <Button
             size="lg"
             color="pink"

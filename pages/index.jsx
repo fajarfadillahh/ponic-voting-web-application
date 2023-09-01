@@ -35,7 +35,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   color="pink"
-                  className="h-[48px] text-base font-bold capitalize"
+                  className="h-[48px] w-[160px] text-base font-bold capitalize"
                 >
                   Buat voting
                 </Button>
