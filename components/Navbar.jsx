@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 // import material-components
 import { Button } from "@material-tailwind/react";
 
 export default function Navbar() {
+  const router = useRouter();
+
   return (
     <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-[1440px] bg-white">
       <div className="container flex h-24 items-center justify-between">
@@ -20,6 +23,7 @@ export default function Navbar() {
             size="lg"
             color="pink"
             className="h-[48px] w-[120px] text-base capitalize text-white"
+            onClick={() => router.push("/auth/login")}
           >
             Masuk
           </Button>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi";
 
 // import material-components
-import { Button } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 
 // import components
 import Layout from "@/components/Layout";
@@ -23,14 +23,20 @@ export default function Home() {
         <section className="pb-16 pt-40">
           <div className="container grid grid-cols-2 items-center gap-8">
             <div>
-              <h1 className="section-title max-w-[520px] text-[48px]">
+              <Typography
+                variant="h1"
+                className="mb-2 max-w-[520px] font-extrabold capitalize text-gray-900"
+              >
                 Tentukan pilihan kamu dari sekarang. 🚀
-              </h1>
-              <p className="section-text max-w-[490px] pb-8">
+              </Typography>
+              <Typography
+                variant="paragraph"
+                className="mb-8 max-w-[490px] font-medium leading-[175%] text-gray-600"
+              >
                 Ponic adalah platform voting berbasis web yang inovatif dan
                 user-friendly yang dirancang untuk memenuhi segala jenis
                 kebutuhan pemungutan suara anda.
-              </p>
+              </Typography>
               <div className="inline-flex items-center gap-3">
                 <Button
                   size="lg"

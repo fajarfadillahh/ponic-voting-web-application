@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -9,6 +10,13 @@ import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    console.log({ email, password });
+  };
+
   return (
     <>
       <Head>
@@ -33,10 +41,20 @@ export default function Login() {
           </div>
 
           <div className="grid w-[430px] gap-8 justify-self-center">
-            <form className="grid w-full gap-8">
+            <form onSubmit={handleLogin} className="grid w-full gap-8">
               <div className="flex flex-col gap-3">
-                <Form type="email" placeholder="Alamat email" />
-                <Form type="password" placeholder="Kata sandi" />
+                <Form
+                  type="email"
+                  placeholder="Alamat email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Form
+                  type="password"
+                  placeholder="Kata sandi"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
 
               <Button
@@ -44,7 +62,7 @@ export default function Login() {
                 color="pink"
                 className="h-[48px] text-base capitalize text-white"
                 fullWidth
-                type="button"
+                type="submit"
               >
                 Masuk
               </Button>
