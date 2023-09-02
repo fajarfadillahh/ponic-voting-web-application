@@ -6,6 +6,7 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
+import CardVoting from "@/components/CardVoting";
 
 export default function Dashboard() {
   return (
@@ -64,16 +65,19 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-8">
+              <div className="flex flex-wrap items-start justify-between gap-8">
                 {/* ==== no data voting ==== */}
-                <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
+                {/* <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
                   <Typography
                     variant="h5"
                     className="font-semibold text-gray-600"
                   >
                     Kamu belum punya voting nih 😚
                   </Typography>
-                </div>
+                </div> */}
+
+                {/* ==== card voting / with data voting ==== */}
+                <CardVoting />
               </div>
             </div>
           </div>
