@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -9,6 +10,8 @@ import { Button, Typography } from "@material-tailwind/react";
 import Layout from "@/components/Layout";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -48,7 +51,9 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="text"
-                  className="inline-flex h-[48px] items-center gap-1 text-base font-bold capitalize text-pink-500"
+                  color="pink"
+                  className="inline-flex h-[48px] items-center gap-1 text-base font-bold capitalize"
+                  onClick={() => router.push("/dashboard")}
                 >
                   Halaman dashboard
                   <HiArrowRight />

@@ -69,7 +69,7 @@ export default function Register() {
               <Button
                 size="lg"
                 color="pink"
-                className="h-[48px] text-base capitalize text-white"
+                className="h-[48px] text-base capitalize"
                 fullWidth
                 type="submit"
               >
