@@ -1,15 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import Flatpickr from "react-flatpickr";
-import { HiOutlineArrowLeft } from "react-icons/hi";
+import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
 import { useRouter } from "next/router";
 
 // import material-components
-import { Button, Typography } from "@material-tailwind/react";
+import { Button, Tooltip, Typography } from "@material-tailwind/react";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
+import CandidateForm from "@/components/Candidate/CandidateForm";
 
 export default function CreateVoting() {
   const router = useRouter();
@@ -131,7 +132,21 @@ export default function CreateVoting() {
                 </Typography>
 
                 <div className="flex flex-wrap items-start gap-5">
-                  <div>candidate card</div>
+                  <CandidateForm />
+
+                  {/* add candidates */}
+                  <Tooltip
+                    content="Tambahkan kandidat/opsi"
+                    placement="top"
+                    animate={{
+                      mount: { scale: 1, y: 0 },
+                      unmount: { scale: 0, y: 25 },
+                    }}
+                  >
+                    <div className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white">
+                      <HiOutlinePlus />
+                    </div>
+                  </Tooltip>
                 </div>
               </div>
 
