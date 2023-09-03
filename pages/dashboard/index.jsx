@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -9,6 +10,8 @@ import Form from "@/components/Form";
 import CardVoting from "@/components/CardVoting";
 
 export default function Dashboard() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -62,6 +65,7 @@ export default function Dashboard() {
                       size="lg"
                       color="pink"
                       className="w-[160px] text-base capitalize"
+                      onClick={() => router.push("/dashboard/create")}
                     >
                       Buat voting
                     </Button>
