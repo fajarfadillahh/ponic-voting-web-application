@@ -22,18 +22,22 @@ export default function Dashboard() {
         {/* ==== hero section ==== */}
         <section className="pb-16 pt-40">
           <div className="container grid gap-16">
-            <Typography
-              variant="h1"
-              className="max-w-[750px] justify-self-center text-center font-extrabold capitalize text-gray-900"
-            >
-              Pusat kontrol pemungutan suara online anda 🤖️
-            </Typography>
+            <div className="justify-self-center text-center">
+              <Typography
+                variant="h1"
+                color="blue-gray"
+                className="max-w-[750px] font-extrabold capitalize"
+              >
+                Pusat kontrol pemungutan suara online anda 🤖️
+              </Typography>
+            </div>
 
             <div className="grid gap-8">
               <div className="grid gap-4">
                 <Typography
                   variant="h4"
-                  className="font-bold capitalize text-gray-900"
+                  color="blue-gray"
+                  className="font-bold capitalize"
                 >
                   List voting punya kamu
                 </Typography>
@@ -50,14 +54,14 @@ export default function Dashboard() {
                       size="lg"
                       color="pink"
                       variant="outlined"
-                      className="h-[48px] w-[160px] text-base capitalize"
+                      className="h-[52px] w-[160px] text-base capitalize"
                     >
                       Ikutan voting
                     </Button>
                     <Button
                       size="lg"
                       color="pink"
-                      className="h-[48px] w-[160px] text-base capitalize"
+                      className="w-[160px] text-base capitalize"
                     >
                       Buat voting
                     </Button>
@@ -70,7 +74,8 @@ export default function Dashboard() {
                 {/* <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
                   <Typography
                     variant="h5"
-                    className="font-semibold text-gray-600"
+                    color="gray"
+                    className="font-semibold"
                   >
                     Kamu belum punya voting nih 😚
                   </Typography>
