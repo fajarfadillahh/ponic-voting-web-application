@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { HiOutlineCog, HiOutlineTrash } from "react-icons/hi";
 
 // import material-components
@@ -9,6 +10,8 @@ import {
 } from "@material-tailwind/react";
 
 export default function CardVoting() {
+  const router = useRouter();
+
   return (
     <div className="w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)]">
       <div className="grid gap-8">
@@ -65,6 +68,7 @@ export default function CardVoting() {
               <IconButton
                 size="md"
                 className="bg-gray-200 text-xl text-gray-900"
+                onClick={() => router.push("/dashboard/edit/1")}
               >
                 <HiOutlineCog />
               </IconButton>
