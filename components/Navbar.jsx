@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 // import material-components
-import { Button } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -13,9 +13,9 @@ export default function Navbar() {
       <div className="container flex h-24 items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2">
           <Image src="/assets/icon.svg" alt="icon" width={36} height={36} />
-          <span className="text-[22px] font-extrabold text-gray-900">
+          <Typography variant="h5" color="blue-gray" className="font-extrabold">
             Ponic<span className="text-pink-500">.</span>
-          </span>
+          </Typography>
         </Link>
 
         <div className="inline-flex items-center gap-4">
@@ -23,7 +23,7 @@ export default function Navbar() {
           <Button
             size="lg"
             color="pink"
-            className="h-[48px] w-[120px] text-base capitalize text-white"
+            className="w-[120px] text-base capitalize"
             onClick={() => router.push("/auth/login")}
           >
             Masuk

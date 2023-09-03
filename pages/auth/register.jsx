@@ -31,13 +31,15 @@ export default function Register() {
           <div className="text-center">
             <Typography
               variant="h2"
-              className="mb-3 font-extrabold capitalize text-gray-900"
+              color="blue-gray"
+              className="mb-3 font-extrabold capitalize"
             >
               Selamat datang di Ponic. 🤩
             </Typography>
             <Typography
               variant="paragraph"
-              className="font-medium text-gray-600"
+              color="gray"
+              className="font-medium"
             >
               Silakan buat akun terlebih dahulu, sebelum kamu mulai voting.
             </Typography>
@@ -79,7 +81,8 @@ export default function Register() {
 
             <Typography
               variant="paragraph"
-              className="text-center font-medium text-gray-600"
+              color="gray"
+              className="text-center font-medium"
             >
               Sudah punya akun? Klik{" "}
               <Link

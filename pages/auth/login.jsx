@@ -28,13 +28,15 @@ export default function Login() {
           <div className="text-center">
             <Typography
               variant="h2"
-              className="mb-3 font-extrabold capitalize text-gray-900"
+              color="blue-gray"
+              className="mb-3 font-extrabold capitalize"
             >
               Hi, Selamat datang kembali. 👏
             </Typography>
             <Typography
               variant="paragraph"
-              className="font-medium text-gray-600"
+              color="gray"
+              className="font-medium"
             >
               Ayo masuk dulu, biar ketahuan kamu milih siapa.
             </Typography>
@@ -70,7 +72,8 @@ export default function Login() {
 
             <Typography
               variant="paragraph"
-              className="text-center font-medium text-gray-600"
+              color="gray"
+              className="text-center font-medium"
             >
               Belum punya akun? Klik{" "}
               <Link

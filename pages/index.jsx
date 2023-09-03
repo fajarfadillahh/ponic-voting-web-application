@@ -28,13 +28,15 @@ export default function Home() {
             <div>
               <Typography
                 variant="h1"
-                className="mb-2 max-w-[520px] font-extrabold capitalize text-gray-900"
+                color="blue-gray"
+                className="mb-2 max-w-[520px] font-extrabold capitalize"
               >
                 Tentukan pilihan kamu dari sekarang. 🚀
               </Typography>
               <Typography
                 variant="paragraph"
-                className="mb-8 max-w-[490px] font-medium leading-[175%] text-gray-600"
+                color="gray"
+                className="mb-8 max-w-[490px] font-medium"
               >
                 Ponic adalah platform voting berbasis web yang inovatif dan
                 user-friendly yang dirancang untuk memenuhi segala jenis
@@ -44,7 +46,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   color="pink"
-                  className="h-[48px] w-[160px] text-base font-bold capitalize"
+                  className="w-[160px] text-base capitalize"
                 >
                   Buat voting
                 </Button>
@@ -52,7 +54,7 @@ export default function Home() {
                   size="lg"
                   variant="text"
                   color="pink"
-                  className="inline-flex h-[48px] items-center gap-1 text-base font-bold capitalize"
+                  className="inline-flex items-center gap-1 text-base capitalize"
                   onClick={() => router.push("/dashboard")}
                 >
                   Halaman dashboard

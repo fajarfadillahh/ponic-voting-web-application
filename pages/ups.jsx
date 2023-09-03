@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -8,6 +9,8 @@ import { Button, Typography } from "@material-tailwind/react";
 import Layout from "@/components/Layout";
 
 export default function SomethingWrong() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -27,14 +30,16 @@ export default function SomethingWrong() {
 
             <div className="text-center">
               <Typography
-                variant="h1"
-                className="mb-3 font-extrabold capitalize text-gray-900"
+                variant="h2"
+                color="blue-gray"
+                className="mb-3 font-extrabold capitalize"
               >
                 Hmm, ada yang salah deh 🤔
               </Typography>
               <Typography
                 variant="paragraph"
-                className="mb-8 font-medium text-gray-600"
+                color="gray"
+                className="mb-8 font-medium"
               >
                 Sepertinya terjadi kesalahan, silakan refresh/muat ulang halaman
                 ini
@@ -44,7 +49,7 @@ export default function SomethingWrong() {
               <Button
                 size="lg"
                 color="pink"
-                className="h-[48px] text-base capitalize"
+                className="text-base capitalize"
                 onClick={() => router.push("/dashboard")}
               >
                 Kembali ke dashboard
