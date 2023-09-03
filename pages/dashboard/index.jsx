@@ -58,6 +58,7 @@ export default function Dashboard() {
                       color="pink"
                       variant="outlined"
                       className="h-[52px] w-[160px] text-base capitalize"
+                      onClick={() => router.push("/rooms")}
                     >
                       Ikutan voting
                     </Button>
