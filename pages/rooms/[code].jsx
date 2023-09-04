@@ -8,6 +8,7 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 import CountDown from "@/components/Countdown/CountDown";
+import CandidateItem from "@/components/Candidate/CandidateItem";
 
 export default function Voting() {
   const router = useRouter();
@@ -34,7 +35,11 @@ export default function Voting() {
               <CountDown />
             </div>
 
-            <div className="">kandidat</div>
+            <div className="grid w-full max-w-[850px] gap-6 justify-self-center">
+              <CandidateItem />
+              <CandidateItem />
+              <CandidateItem />
+            </div>
 
             <div className="grid gap-4 justify-self-center">
               <Button size="lg" color="pink" className="text-base capitalize">
