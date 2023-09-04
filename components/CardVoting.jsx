@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   HiOutlineCog,
@@ -12,7 +13,9 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
-import Link from "next/link";
+
+// import components
+import Status from "@/components/Status";
 
 export default function CardVoting() {
   const router = useRouter();
@@ -76,7 +79,7 @@ export default function CardVoting() {
                 </Typography>
               </div>
 
-              <Chip variant="ghost" color="green" size="sm" value="Selesai" />
+              <Status value="Selesai" />
             </div>
           </div>
 
