@@ -1,21 +1,34 @@
-// import material-components
 import { Typography } from "@material-tailwind/react";
 
-export default function Status({ value }) {
+export default function Status({ start, end }) {
   let baseStyle = "inline-flex rounded-md px-3 py-0.5 text-[14px] font-bold";
 
-  // condition value
-  if (value === "Selesai") {
-    baseStyle += " bg-green-100 text-green-600";
-  } else if (value === "Berjalan") {
-    baseStyle += " bg-orange-100 text-orange-600";
-  } else if (value === "Pending") {
-    baseStyle += " bg-gray-200 text-gray-600";
+  if (Date.now() < start) {
+    return (
+      <Typography
+        variant="small"
+        className={`${baseStyle} bg-gray-200 text-gray-600`}
+      >
+        pending
+      </Typography>
+    );
+  } else if (Date.now() > start) {
+    return (
+      <Typography
+        variant="small"
+        className={`${baseStyle} bg-orange-100 text-orange-600`}
+      >
+        Berlangsung
+      </Typography>
+    );
+  } else if (Date.now() > end) {
+    return (
+      <Typography
+        variant="small"
+        className={`${baseStyle} bg-green-100 text-green-600`}
+      >
+        Selesai
+      </Typography>
+    );
   }
-
-  return (
-    <Typography variant="small" className={`${baseStyle}`}>
-      {value}
-    </Typography>
-  );
 }

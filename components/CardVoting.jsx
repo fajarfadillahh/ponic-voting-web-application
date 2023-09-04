@@ -5,19 +5,15 @@ import {
   HiOutlineExternalLink,
   HiOutlineTrash,
 } from "react-icons/hi";
-
-// import material-components
-import {
-  Chip,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@material-tailwind/react";
+import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 
 // import components
 import Status from "@/components/Status";
 
-export default function CardVoting() {
+// import utils
+import { convertTime } from "@/utils/convert";
+
+export default function CardVoting({ room }) {
   const router = useRouter();
 
   return (
@@ -31,7 +27,7 @@ export default function CardVoting() {
         }}
       >
         <Link
-          href="/rooms/ASDFGHJK"
+          href={`/rooms/${room.code}`}
           target="_blank"
           className="absolute -left-5 -top-4 z-30 translate-y-4 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"
         >
@@ -49,7 +45,7 @@ export default function CardVoting() {
                 content={
                   <div className="w-80">
                     <Typography color="white" className="font-medium">
-                      Pemilihan Ketua Himpunan Mahasiswa Universitas Indonesia
+                      {room.name}
                     </Typography>
                   </div>
                 }
@@ -64,7 +60,7 @@ export default function CardVoting() {
                   color="blue-gray"
                   className="line-clamp-2 font-bold"
                 >
-                  Pemilihan Ketua Himpunan Mahasiswa Universitas Indonesia
+                  {room.name}
                 </Typography>
               </Tooltip>
             </div>
@@ -75,11 +71,11 @@ export default function CardVoting() {
                   Kode voting:
                 </Typography>
                 <Typography variant="small" color="pink" className="font-bold">
-                  KETHMXOU
+                  {room.code}
                 </Typography>
               </div>
 
-              <Status value="Selesai" />
+              <Status start={room.start} end={room.end} />
             </div>
           </div>
 
@@ -95,7 +91,7 @@ export default function CardVoting() {
               <IconButton
                 size="md"
                 className="bg-gray-200 text-xl text-gray-900"
-                onClick={() => router.push("/dashboard/edit/1")}
+                onClick={() => router.push(`/dashboard/edit/${room.id}`)}
               >
                 <HiOutlineCog />
               </IconButton>
@@ -126,7 +122,7 @@ export default function CardVoting() {
               color="blue-gray"
               className="max-w-[170px] font-bold"
             >
-              Kamis 31/08/2023 10:00
+              {convertTime(room.start)}
             </Typography>
           </div>
 
@@ -139,7 +135,7 @@ export default function CardVoting() {
               color="blue-gray"
               className="max-w-[170px] font-bold"
             >
-              Minggu 03/09/2023 12:30
+              {convertTime(room.end)}
             </Typography>
           </div>
         </div>

@@ -13,6 +13,8 @@ import fetcher from "@/utils/fetcher";
 export default function Dashboard({ rooms }) {
   const router = useRouter();
 
+  console.log(rooms);
+
   return (
     <>
       <Head>
@@ -88,7 +90,7 @@ export default function Dashboard({ rooms }) {
                   </div>
                 ) : (
                   rooms.data.map((room, index) => {
-                    <CardVoting key={index} room={room} />;
+                    return <CardVoting key={index} room={room} />;
                   })
                 )}
               </div>
