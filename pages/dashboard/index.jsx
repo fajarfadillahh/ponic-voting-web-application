@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-
-// import material-components
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
@@ -9,7 +7,10 @@ import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CardVoting from "@/components/CardVoting";
 
-export default function Dashboard() {
+// import utils
+import fetcher from "@/utils/fetcher";
+
+export default function Dashboard({ rooms }) {
   const router = useRouter();
 
   return (
@@ -75,19 +76,21 @@ export default function Dashboard() {
               </div>
 
               <div className="flex flex-wrap items-start justify-between gap-8">
-                {/* ==== no data voting ==== */}
-                {/* <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
-                  <Typography
-                    variant="h5"
-                    color="gray"
-                    className="font-semibold"
-                  >
-                    Kamu belum punya voting nih 😚
-                  </Typography>
-                </div> */}
-
-                {/* ==== card voting / with data voting ==== */}
-                <CardVoting />
+                {rooms.data.length == 0 ? (
+                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
+                    <Typography
+                      variant="h5"
+                      color="gray"
+                      className="font-semibold"
+                    >
+                      Kamu belum punya voting nih 😚
+                    </Typography>
+                  </div>
+                ) : (
+                  rooms.data.map((room, index) => {
+                    <CardVoting key={index} room={room} />;
+                  })
+                )}
               </div>
             </div>
           </div>
@@ -95,4 +98,24 @@ export default function Dashboard() {
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const token = req.cookies.token;
+
+  try {
+    const { data } = await fetcher("/rooms", "GET", null, token);
+
+    return {
+      props: {
+        rooms: data,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+      },
+    };
+  }
 }
