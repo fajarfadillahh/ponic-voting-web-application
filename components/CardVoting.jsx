@@ -1,5 +1,9 @@
 import { useRouter } from "next/router";
-import { HiOutlineCog, HiOutlineTrash } from "react-icons/hi";
+import {
+  HiOutlineCog,
+  HiOutlineExternalLink,
+  HiOutlineTrash,
+} from "react-icons/hi";
 
 // import material-components
 import {
@@ -8,12 +12,32 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
+import Link from "next/link";
 
 export default function CardVoting() {
   const router = useRouter();
 
   return (
-    <div className="w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)]">
+    <div className="group relative w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)]">
+      <Tooltip
+        content="Ikutan voting"
+        placement="top"
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0, y: 25 },
+        }}
+      >
+        <Link
+          href="/rooms/ASDFGHJK"
+          target="_blank"
+          className="absolute -left-4 -top-4 z-30 hidden transition group-hover:block"
+        >
+          <IconButton size="md" color="pink" className="rounded-full text-xl">
+            <HiOutlineExternalLink />
+          </IconButton>
+        </Link>
+      </Tooltip>
+
       <div className="grid gap-8">
         <div className="inline-flex items-start justify-between">
           <div className="grid gap-3">
