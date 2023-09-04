@@ -13,8 +13,6 @@ import fetcher from "@/utils/fetcher";
 export default function Dashboard({ rooms }) {
   const router = useRouter();
 
-  console.log(rooms);
-
   return (
     <>
       <Head>

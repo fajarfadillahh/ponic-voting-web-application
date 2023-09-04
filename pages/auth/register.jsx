@@ -1,22 +1,45 @@
 import Head from "next/head";
 import Link from "next/link";
+import Cookies from "js-cookie";
 import { useState } from "react";
-
-// import material-components
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 
+// import utils
+import fetcher from "@/utils/fetcher";
+
 export default function Register() {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegister = () => {
-    console.log({ email, fullname, password });
-  };
+  async function handleRegister() {
+    try {
+      const { data } = await fetcher(
+        "/users/register",
+        "POST",
+        {
+          email,
+          fullname,
+          password,
+        },
+        null,
+      );
+
+      if (data.success) {
+        Cookies.set("token", data.data.token, {
+          path: "/",
+          expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
+        });
+        return (window.location.href = "/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -46,7 +69,7 @@ export default function Register() {
           </div>
 
           <div className="grid w-[430px] gap-8 justify-self-center">
-            <form onSubmit={handleRegister} className="grid w-full gap-8">
+            <form className="grid w-full gap-8">
               <div className="flex flex-col gap-3">
                 <Form
                   type="email"
@@ -73,7 +96,7 @@ export default function Register() {
                 color="pink"
                 className="text-base capitalize"
                 fullWidth
-                type="submit"
+                onClick={handleRegister}
               >
                 Buat akun
               </Button>
