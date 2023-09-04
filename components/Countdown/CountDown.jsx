@@ -24,7 +24,7 @@ export default function CountDown({ className, end, handleComplete }) {
         Voting akan berakhir dalam:
       </Typography>
 
-      <Countdown date={Date.now() + 100000000} renderer={renderer} />
+      <Countdown date={end} renderer={renderer} />
     </div>
   );
 }
