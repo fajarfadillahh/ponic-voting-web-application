@@ -1,21 +1,43 @@
 import Head from "next/head";
 import Link from "next/link";
+import Cookies from "js-cookie";
 import { useState } from "react";
-
-// import material-components
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 
+// import utils
+import fetcher from "@/utils/fetcher";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log({ email, password });
-  };
+  async function handleLogin() {
+    try {
+      const { data } = await fetcher(
+        "/users/login",
+        "POST",
+        {
+          email,
+          password,
+        },
+        null,
+      );
+
+      if (data.success) {
+        Cookies.set("token", data.data.token, {
+          path: "/",
+          expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
+        });
+        return (window.location.href = "/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -43,7 +65,7 @@ export default function Login() {
           </div>
 
           <div className="grid w-[430px] gap-8 justify-self-center">
-            <form onSubmit={handleLogin} className="grid w-full gap-8">
+            <form className="grid w-full gap-8">
               <div className="flex flex-col gap-3">
                 <Form
                   type="email"
@@ -64,7 +86,7 @@ export default function Login() {
                 color="pink"
                 className="text-base capitalize"
                 fullWidth
-                type="submit"
+                onClick={handleLogin}
               >
                 Masuk
               </Button>
