@@ -30,7 +30,7 @@ export default function CardVoting() {
         <Link
           href="/rooms/ASDFGHJK"
           target="_blank"
-          className="absolute -left-4 -top-4 z-30 hidden transition group-hover:block"
+          className="absolute -left-5 -top-4 z-30 translate-y-4 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"
         >
           <IconButton size="md" color="pink" className="rounded-full text-xl">
             <HiOutlineExternalLink />
