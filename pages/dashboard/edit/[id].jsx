@@ -1,19 +1,87 @@
 import Head from "next/head";
 import Image from "next/image";
 import Flatpickr from "react-flatpickr";
+import Cookies from "js-cookie";
 import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
-import { useRouter } from "next/router";
-
-// import material-components
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+
+// reactflatpicr css
+import "flatpickr/dist/flatpickr.css";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CandidateForm from "@/components/Candidate/CandidateForm";
 
-export default function EditVoting() {
+// import utils
+import fetcher from "@/utils/fetcher";
+import LoadingButton from "@/components/Loading/LoadingButton";
+
+export default function EditVoting({ rooms }) {
   const router = useRouter();
+  const token = Cookies.get("token");
+
+  const [title, setTitle] = useState(rooms.data.name);
+  const [startFromInput, setStartFromInput] = useState(null);
+  const [endFromInput, setEndFromInput] = useState(null);
+  const [startFromData, setStartFromData] = useState(rooms.data.start);
+  const [endFromData, setEndFromData] = useState(rooms.data.end);
+  const [candidates, setCandidates] = useState(rooms.data.candidates);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const addCandidateForm = () => {
+    const newCandidate = {
+      name: "",
+      id: candidates.length + 1,
+    };
+    setCandidates([...candidates, newCandidate]);
+  };
+
+  const removeCandidateForm = (id) => {
+    const newCandidates = candidates.filter((candidate) => candidate.id !== id);
+
+    setCandidates(newCandidates);
+  };
+
+  const handleCandidateName = (value, id) => {
+    const indexOfCandidate = candidates.findIndex(
+      (candidate) => candidate.id == id,
+    );
+
+    candidates[indexOfCandidate] = {
+      id,
+      name: value,
+    };
+
+    setCandidates([...candidates]);
+  };
+
+  const handleUpdateVoting = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await fetcher(
+        "/rooms",
+        "PATCH",
+        {
+          room_id: rooms.data.id,
+          name: title,
+          start: startFromInput ? startFromInput : startFromData,
+          end: endFromInput ? endFromInput : endFromData,
+          candidates: candidates,
+        },
+        token,
+      );
+
+      if (data.success) {
+        return router.push("/dashboard");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -83,6 +151,9 @@ export default function EditVoting() {
                     <Form
                       type="text"
                       placeholder="Contoh: Pemilihan Ketua Osis"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      setTitle={setTitle}
                     />
                   </div>
 
@@ -97,9 +168,15 @@ export default function EditVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true }}
+                        options={{ time_24hr: true, minDate: Date.now() }}
+                        value={
+                          startFromData > Date.now()
+                            ? startFromData
+                            : Date.now()
+                        }
+                        onClose={(date) => setStartFromInput(date[0].getTime())}
                         placeholder="Pilih waktu mulai"
-                        className="flex h-[52px] w-full rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-900 outline-none placeholder:text-[14px] placeholder:font-semibold placeholder:text-gray-600 focus:border focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20"
+                        className="flatpickr-class"
                       />
                     </div>
 
@@ -113,9 +190,11 @@ export default function EditVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true }}
-                        placeholder="Pilih waktu selesai"
-                        className="flex h-[52px] w-full rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-900 outline-none placeholder:text-[14px] placeholder:font-semibold placeholder:text-gray-600 focus:border focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20"
+                        options={{ time_24hr: true, minDate: startFromInput }}
+                        value={endFromInput ? endFromInput : endFromData}
+                        onClose={(date) => setEndFromInput(date[0].getTime())}
+                        placeholder="Pilih waktu mulai"
+                        className="flatpickr-class"
                       />
                     </div>
                   </div>
@@ -132,7 +211,15 @@ export default function EditVoting() {
                 </Typography>
 
                 <div className="flex flex-wrap items-start gap-5">
-                  <CandidateForm />
+                  {candidates.map((candidate, index) => (
+                    <CandidateForm
+                      key={index}
+                      candidate={candidate}
+                      removeCandidateForm={removeCandidateForm}
+                      index={index}
+                      handleCandidateName={handleCandidateName}
+                    />
+                  ))}
 
                   {/* add candidates */}
                   <Tooltip
@@ -143,24 +230,67 @@ export default function EditVoting() {
                       unmount: { scale: 0, y: 25 },
                     }}
                   >
-                    <div className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white">
+                    <div
+                      className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white"
+                      onClick={() => addCandidateForm()}
+                    >
                       <HiOutlinePlus />
                     </div>
                   </Tooltip>
                 </div>
               </div>
 
-              <Button
-                size="lg"
-                color="pink"
-                className="w-[210px] justify-self-end text-base capitalize"
-              >
-                Perbarui voting 🚀
-              </Button>
+              {isLoading ? (
+                <LoadingButton className="h-[52px] w-[170px] justify-self-end" />
+              ) : (
+                <Button
+                  size="lg"
+                  color="pink"
+                  className="w-[210px] justify-self-end text-base capitalize"
+                  onClick={handleUpdateVoting}
+                >
+                  Perbarui voting 🚀
+                </Button>
+              )}
             </div>
           </div>
         </section>
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps({ params, req }) {
+  const token = req.cookies.token;
+
+  try {
+    const { data } = await fetcher(
+      `/rooms?id=${params.id}`,
+      "GET",
+      null,
+      token,
+    );
+
+    if (data.success) {
+      return {
+        props: {
+          rooms: data,
+        },
+      };
+    }
+  } catch (error) {
+    if (error.response.status == 404) {
+      return {
+        redirect: {
+          destination: "/404",
+        },
+      };
+    }
+
+    return {
+      redirect: {
+        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+      },
+    };
+  }
 }
