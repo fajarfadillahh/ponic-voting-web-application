@@ -1,10 +1,35 @@
 import { Typography } from "@material-tailwind/react";
 
+// import utils
+import { useState, useEffect } from "react";
+
 export default function Status({ start, end }) {
+  const [status, setStatus] = useState(() => {
+    if (Date.now() < start) {
+      return "menunggu";
+    } else if (Date.now() > end) {
+      return "selesai";
+    } else if (Date.now() > start) {
+      return "berjalan";
+    }
+  });
+
+  useEffect(() => {
+    setInterval(() => {
+      if (Date.now() < start) {
+        setStatus("menunggu");
+      } else if (Date.now() > end) {
+        setStatus("selesai");
+      } else if (Date.now() > start) {
+        setStatus("berjalan");
+      }
+    }, 1000);
+  }, [start, end]);
+
   let baseStyle =
     "inline-flex rounded-md px-3 py-0.5 text-[12px] font-bold uppercase";
 
-  if (Date.now() > end) {
+  if (status == "selesai") {
     return (
       <Typography
         variant="small"
@@ -13,7 +38,7 @@ export default function Status({ start, end }) {
         Selesai
       </Typography>
     );
-  } else if (Date.now() > start) {
+  } else if (status == "berjalan") {
     return (
       <Typography
         variant="small"
@@ -22,7 +47,7 @@ export default function Status({ start, end }) {
         Berjalan
       </Typography>
     );
-  } else if (Date.now() < start) {
+  } else if (status == "menunggu") {
     return (
       <Typography
         variant="small"
