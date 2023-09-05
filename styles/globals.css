@@ -20,6 +20,11 @@
   .container {
     @apply mx-auto w-[calc(100%-3rem)] max-w-[1280px];
   }
+
+  /* flatpickr custom form */
+  .flatpickr-class {
+    @apply flex h-[52px] w-full rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-900 outline-none placeholder:text-[14px] placeholder:font-semibold placeholder:text-gray-600 focus:border focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20;
+  }
 }
 
 /* ::selection customize color */

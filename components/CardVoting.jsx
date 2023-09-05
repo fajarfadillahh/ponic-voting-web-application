@@ -65,7 +65,7 @@ export default function CardVoting({ room }) {
               </Tooltip>
             </div>
 
-            <div className="flex max-w-[270px] items-center justify-between">
+            <div className="flex max-w-[270px] items-center gap-6">
               <div className="inline-flex items-center gap-1">
                 <Typography color="gray" className="text-[12px] font-medium">
                   Kode voting:

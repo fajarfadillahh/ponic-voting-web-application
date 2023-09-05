@@ -1,19 +1,80 @@
 import Head from "next/head";
 import Image from "next/image";
 import Flatpickr from "react-flatpickr";
+import Cookies from "js-cookie";
 import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
-import { useRouter } from "next/router";
-
-// import material-components
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+
+// reactflatpicr css
+import "flatpickr/dist/flatpickr.css";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CandidateForm from "@/components/Candidate/CandidateForm";
 
+// import utils
+import fetcher from "@/utils/fetcher";
+
 export default function CreateVoting() {
   const router = useRouter();
+  const token = Cookies.get("token");
+
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [title, setTitle] = useState("");
+  const [candidates, setCandidates] = useState([]);
+
+  const addCandidateForm = () => {
+    const newCandidate = {
+      name: "",
+      id: candidates.length + 1,
+    };
+    setCandidates([...candidates, newCandidate]);
+  };
+
+  const removeCandidateForm = (id) => {
+    const newCandidates = candidates.filter((candidate) => candidate.id !== id);
+
+    setCandidates(newCandidates);
+  };
+
+  const handleCandidateName = (value, id) => {
+    const indexOfCandidate = candidates.findIndex(
+      (candidate) => candidate.id == id,
+    );
+
+    candidates[indexOfCandidate] = {
+      id,
+      name: value,
+    };
+
+    setCandidates([...candidates]);
+  };
+
+  const handleCreateVoting = async () => {
+    try {
+      const { data } = await fetcher(
+        "/rooms",
+        "POST",
+        {
+          name: title,
+          start: startDate,
+          end: endDate,
+          candidates: candidates,
+        },
+        token,
+      );
+
+      if (data.success) {
+        return router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -83,6 +144,8 @@ export default function CreateVoting() {
                     <Form
                       type="text"
                       placeholder="Contoh: Pemilihan Ketua Osis"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
 
@@ -97,9 +160,10 @@ export default function CreateVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true }}
+                        options={{ time_24hr: true, minDate: Date.now() }}
+                        onClose={(date) => setStartDate(date[0].getTime())}
                         placeholder="Pilih waktu mulai"
-                        className="flex h-[52px] w-full rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-900 outline-none placeholder:text-[14px] placeholder:font-semibold placeholder:text-gray-600 focus:border focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20"
+                        className="flatpickr-class"
                       />
                     </div>
 
@@ -113,9 +177,10 @@ export default function CreateVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true }}
+                        options={{ time_24hr: true, minDate: startDate }}
+                        onClose={(date) => setEndDate(date[0].getTime())}
                         placeholder="Pilih waktu selesai"
-                        className="flex h-[52px] w-full rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-900 outline-none placeholder:text-[14px] placeholder:font-semibold placeholder:text-gray-600 focus:border focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20"
+                        className="flatpickr-class"
                       />
                     </div>
                   </div>
@@ -132,7 +197,15 @@ export default function CreateVoting() {
                 </Typography>
 
                 <div className="flex flex-wrap items-start gap-5">
-                  <CandidateForm />
+                  {candidates.map((candidate, index) => (
+                    <CandidateForm
+                      key={index}
+                      candidate={candidate}
+                      removeCandidateForm={removeCandidateForm}
+                      index={index}
+                      handleCandidateName={handleCandidateName}
+                    />
+                  ))}
 
                   {/* add candidates */}
                   <Tooltip
@@ -143,7 +216,10 @@ export default function CreateVoting() {
                       unmount: { scale: 0, y: 25 },
                     }}
                   >
-                    <div className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white">
+                    <div
+                      className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white"
+                      onClick={() => addCandidateForm()}
+                    >
                       <HiOutlinePlus />
                     </div>
                   </Tooltip>
@@ -154,6 +230,7 @@ export default function CreateVoting() {
                 size="lg"
                 color="pink"
                 className="w-[170px] justify-self-end text-base capitalize"
+                onClick={handleCreateVoting}
               >
                 Buat voting 🚀
               </Button>
