@@ -15,7 +15,7 @@ export default function Status({ start, end }) {
   });
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       if (Date.now() < start) {
         setStatus("menunggu");
       } else if (Date.now() > end) {
@@ -24,6 +24,8 @@ export default function Status({ start, end }) {
         setStatus("berjalan");
       }
     }, 1000);
+
+    return () => clearInterval(interval);
   }, [start, end]);
 
   let baseStyle =
