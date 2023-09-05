@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import {
   HiOutlineCog,
@@ -12,9 +13,31 @@ import Status from "@/components/Status";
 
 // import utils
 import { convertTime } from "@/utils/convert";
+import fetcher from "@/utils/fetcher";
 
-export default function CardVoting({ room }) {
+export default function CardVoting({ room, mutate }) {
+  const token = Cookies.get("token");
   const router = useRouter();
+
+  const handleDeleteVoting = async (room_id, code) => {
+    try {
+      const { data } = await fetcher(
+        "/rooms",
+        "DELETE",
+        {
+          room_id: room_id,
+          code: code,
+        },
+        token,
+      );
+
+      if (data.success) {
+        mutate();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="group relative w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)]">
@@ -105,7 +128,12 @@ export default function CardVoting({ room }) {
                 unmount: { scale: 0, y: 25 },
               }}
             >
-              <IconButton size="md" color="red" className="text-xl">
+              <IconButton
+                size="md"
+                color="red"
+                className="text-xl"
+                onClick={() => handleDeleteVoting(room.id, room.code)}
+              >
                 <HiOutlineTrash />
               </IconButton>
             </Tooltip>

@@ -32,10 +32,7 @@ export default function Dashboard(props) {
   return (
     <>
       <Head>
-        <title>
-          Selamat datang di Jujurly. - Aplikasi voting berbasis web terbaik di
-          Indonesia!
-        </title>
+        <title>Dashboard Ponic. - Kontrol voting kamu disini!</title>
       </Head>
 
       <Layout>
@@ -104,7 +101,9 @@ export default function Dashboard(props) {
                   </div>
                 ) : (
                   rooms.data.map((room, index) => {
-                    return <CardVoting key={index} room={room} />;
+                    return (
+                      <CardVoting key={index} room={room} mutate={mutate} />
+                    );
                   })
                 )}
               </div>
