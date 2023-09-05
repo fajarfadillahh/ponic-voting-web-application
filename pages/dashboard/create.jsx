@@ -17,6 +17,7 @@ import CandidateForm from "@/components/Candidate/CandidateForm";
 
 // import utils
 import fetcher from "@/utils/fetcher";
+import LoadingButton from "@/components/Loading/LoadingButton";
 
 export default function CreateVoting() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function CreateVoting() {
   const [endDate, setEndDate] = useState(null);
   const [title, setTitle] = useState("");
   const [candidates, setCandidates] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addCandidateForm = () => {
     const newCandidate = {
@@ -56,6 +58,7 @@ export default function CreateVoting() {
 
   const handleCreateVoting = async () => {
     try {
+      setIsLoading(true);
       const { data } = await fetcher(
         "/rooms",
         "POST",
@@ -72,6 +75,7 @@ export default function CreateVoting() {
         return router.push("/dashboard");
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -226,14 +230,18 @@ export default function CreateVoting() {
                 </div>
               </div>
 
-              <Button
-                size="lg"
-                color="pink"
-                className="w-[170px] justify-self-end text-base capitalize"
-                onClick={handleCreateVoting}
-              >
-                Buat voting 🚀
-              </Button>
+              {isLoading ? (
+                <LoadingButton className="h-[52px] w-[170px] justify-self-end" />
+              ) : (
+                <Button
+                  size="lg"
+                  color="pink"
+                  className="w-[170px] justify-self-end text-base capitalize"
+                  onClick={handleCreateVoting}
+                >
+                  Buat voting 🚀
+                </Button>
+              )}
             </div>
           </div>
         </section>

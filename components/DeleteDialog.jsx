@@ -8,7 +8,15 @@ import {
 } from "@material-tailwind/react";
 import { HiBell } from "react-icons/hi";
 
-export default function DeleteDialog({ open, handleOpen, handleDeleteVoting }) {
+// import components
+import LoadingButton from "@/components/Loading/LoadingButton";
+
+export default function DeleteDialog({
+  open,
+  handleOpen,
+  handleDeleteVoting,
+  isLoading,
+}) {
   return (
     <Dialog open={open} handler={handleOpen} size="xs">
       <DialogHeader>
@@ -36,15 +44,19 @@ export default function DeleteDialog({ open, handleOpen, handleDeleteVoting }) {
         >
           batal
         </Button>
-        <Button
-          size="md"
-          variant="red"
-          color="red"
-          className="text-[14px] capitalize"
-          onClick={handleDeleteVoting}
-        >
-          hapus
-        </Button>
+
+        {isLoading ? (
+          <LoadingButton className="h-[46px] w-[88px]" />
+        ) : (
+          <Button
+            size="md"
+            color="red"
+            className="text-[14px] capitalize"
+            onClick={handleDeleteVoting}
+          >
+            hapus
+          </Button>
+        )}
       </DialogFooter>
     </Dialog>
   );

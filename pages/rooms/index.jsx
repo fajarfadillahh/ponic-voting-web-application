@@ -3,8 +3,6 @@ import Image from "next/image";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { useState } from "react";
-
-// import material-components
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components

@@ -19,11 +19,13 @@ import { useState } from "react";
 
 export default function CardVoting({ room, mutate }) {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const token = Cookies.get("token");
   const router = useRouter();
 
   const handleDeleteVoting = async (room_id, code) => {
     try {
+      setIsLoading(true);
       const { data } = await fetcher(
         "/rooms",
         "DELETE",
@@ -39,6 +41,7 @@ export default function CardVoting({ room, mutate }) {
         mutate();
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -147,6 +150,7 @@ export default function CardVoting({ room, mutate }) {
               open={open}
               handleOpen={() => setOpen(!open)}
               handleDeleteVoting={() => handleDeleteVoting(room.id, room.code)}
+              isLoading={isLoading}
             />
           </div>
         </div>
