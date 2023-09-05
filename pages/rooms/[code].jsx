@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Button, Typography } from "@material-tailwind/react";
@@ -8,13 +8,39 @@ import { Button, Typography } from "@material-tailwind/react";
 import Layout from "@/components/Layout";
 import CountDown from "@/components/Countdown/CountDown";
 import CandidateItem from "@/components/Candidate/CandidateItem";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
 
 // import utils
 import fetcher from "@/utils/fetcher";
+import swrfetcher from "@/utils/swrfetcher";
+import useSWR from "swr";
 
-export default function Voting({ rooms }) {
+export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+
+  const {
+    data: rooms,
+    mutate,
+    isLoading,
+  } = useSWR(`/rooms/?code=${props.code}`, swrfetcher, {
+    fallback: props.rooms,
+    refreshInterval: Date.now() < props.rooms.data.end ? 10000 : false,
+    revalidateOnFocus: false,
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return;
+  }
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>

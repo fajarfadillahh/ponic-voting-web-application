@@ -6,12 +6,28 @@ import { Button, Typography } from "@material-tailwind/react";
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CardVoting from "@/components/CardVoting";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
 
 // import utils
 import fetcher from "@/utils/fetcher";
+import swrfetcher from "@/utils/swrfetcher";
+import useSWR from "swr";
 
-export default function Dashboard({ rooms }) {
+export default function Dashboard(props) {
   const router = useRouter();
+
+  const {
+    data: rooms,
+    mutate,
+    isLoading,
+  } = useSWR("/rooms", swrfetcher, {
+    revalidateOnFocus: false,
+    fallback: props.rooms,
+  });
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
