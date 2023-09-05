@@ -51,7 +51,6 @@ export default function CardVoting({ room, mutate }) {
       >
         <Link
           href={`/rooms/${room.code}`}
-          target="_blank"
           className="absolute -left-5 -top-4 z-30 translate-y-4 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"
         >
           <IconButton size="md" color="pink" className="rounded-full text-xl">
@@ -67,7 +66,10 @@ export default function CardVoting({ room, mutate }) {
               <Tooltip
                 content={
                   <div className="w-80">
-                    <Typography color="white" className="font-medium">
+                    <Typography
+                      color="white"
+                      className="font-medium capitalize"
+                    >
                       {room.name}
                     </Typography>
                   </div>
@@ -81,7 +83,7 @@ export default function CardVoting({ room, mutate }) {
                 <Typography
                   variant="h5"
                   color="blue-gray"
-                  className="line-clamp-2 font-bold"
+                  className="line-clamp-2 font-bold capitalize"
                 >
                   {room.name}
                 </Typography>

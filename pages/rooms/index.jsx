@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 // import material-components
 import { Button, Typography } from "@material-tailwind/react";
@@ -11,6 +12,7 @@ import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 
 export default function Participant() {
+  const [code, setCode] = useState("");
   const router = useRouter();
 
   return (
@@ -55,13 +57,15 @@ export default function Participant() {
                     type="text"
                     placeholder="Masukan Kode Voting"
                     className="text-center uppercase placeholder:capitalize"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value.substring(0, 8))}
                   />
 
                   <Button
                     size="lg"
                     color="pink"
                     className="text-base capitalize"
-                    onClick={() => router.push("/rooms/ASDFGHJK")}
+                    onClick={() => router.push(`/rooms/${code}`)}
                   >
                     Ikutan voting
                   </Button>
