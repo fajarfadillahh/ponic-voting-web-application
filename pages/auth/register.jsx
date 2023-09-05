@@ -10,14 +10,17 @@ import Form from "@/components/Form";
 
 // import utils
 import fetcher from "@/utils/fetcher";
+import LoadingButton from "@/components/Loading/LoadingButton";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleRegister() {
     try {
+      setIsLoading(true);
       const { data } = await fetcher(
         "/users/register",
         "POST",
@@ -37,6 +40,7 @@ export default function Register() {
         return (window.location.href = "/dashboard");
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   }
@@ -91,15 +95,19 @@ export default function Register() {
                 />
               </div>
 
-              <Button
-                size="lg"
-                color="pink"
-                className="text-base capitalize"
-                fullWidth
-                onClick={handleRegister}
-              >
-                Buat akun
-              </Button>
+              {isLoading ? (
+                <LoadingButton className="h-[52px] w-full" />
+              ) : (
+                <Button
+                  size="lg"
+                  color="pink"
+                  className="text-base capitalize"
+                  fullWidth
+                  onClick={handleRegister}
+                >
+                  Buat akun
+                </Button>
+              )}
             </form>
 
             <Typography

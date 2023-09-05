@@ -7,6 +7,7 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
+import LoadingButton from "@/components/Loading/LoadingButton";
 
 // import utils
 import fetcher from "@/utils/fetcher";
@@ -14,9 +15,11 @@ import fetcher from "@/utils/fetcher";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin() {
     try {
+      setIsLoading(true);
       const { data } = await fetcher(
         "/users/login",
         "POST",
@@ -35,6 +38,7 @@ export default function Login() {
         return (window.location.href = "/dashboard");
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   }
@@ -81,15 +85,19 @@ export default function Login() {
                 />
               </div>
 
-              <Button
-                size="lg"
-                color="pink"
-                className="text-base capitalize"
-                fullWidth
-                onClick={handleLogin}
-              >
-                Masuk
-              </Button>
+              {isLoading ? (
+                <LoadingButton className="h-[52px] w-full" />
+              ) : (
+                <Button
+                  size="lg"
+                  color="pink"
+                  className="text-base capitalize"
+                  fullWidth
+                  onClick={handleLogin}
+                >
+                  Masuk
+                </Button>
+              )}
             </form>
 
             <Typography

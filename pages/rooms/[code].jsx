@@ -116,7 +116,7 @@ export default function Voting(props) {
                 <Button
                   size="lg"
                   color="pink"
-                  className="text-base capitalize"
+                  className="min-w-[241px] text-base capitalize"
                   onClick={handleSubmitVoting}
                 >
                   Kirim voting 🚀
@@ -140,7 +140,7 @@ export default function Voting(props) {
                 size="lg"
                 color="pink"
                 variant="text"
-                className="inline-flex items-center gap-1 text-base capitalize"
+                className="inline-flex min-w-[241px] items-center gap-1 text-base capitalize"
                 onClick={() => router.push("/dashboard")}
               >
                 <HiOutlineArrowLeft />
