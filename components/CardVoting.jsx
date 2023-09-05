@@ -10,12 +10,15 @@ import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 
 // import components
 import Status from "@/components/Status";
+import DeleteDialog from "@/components/DeleteDialog";
 
 // import utils
 import { convertTime } from "@/utils/convert";
 import fetcher from "@/utils/fetcher";
+import { useState } from "react";
 
 export default function CardVoting({ room, mutate }) {
+  const [open, setOpen] = useState(false);
   const token = Cookies.get("token");
   const router = useRouter();
 
@@ -32,6 +35,7 @@ export default function CardVoting({ room, mutate }) {
       );
 
       if (data.success) {
+        setOpen(false);
         mutate();
       }
     } catch (error) {
@@ -134,11 +138,16 @@ export default function CardVoting({ room, mutate }) {
                 size="md"
                 color="red"
                 className="text-xl"
-                onClick={() => handleDeleteVoting(room.id, room.code)}
+                onClick={() => setOpen(true)}
               >
                 <HiOutlineTrash />
               </IconButton>
             </Tooltip>
+            <DeleteDialog
+              open={open}
+              handleOpen={() => setOpen(!open)}
+              handleDeleteVoting={() => handleDeleteVoting(room.id, room.code)}
+            />
           </div>
         </div>
 
