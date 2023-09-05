@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Cookies from "js-cookie";
+import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -13,11 +15,13 @@ import LoadingScreen from "@/components/Loading/LoadingScreen";
 // import utils
 import fetcher from "@/utils/fetcher";
 import swrfetcher from "@/utils/swrfetcher";
-import useSWR from "swr";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isClient, setIsClient] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(true);
+
+  const token = Cookies.get("token");
   const router = useRouter();
 
   const {
@@ -30,9 +34,59 @@ export default function Voting(props) {
     revalidateOnFocus: false,
   });
 
+  const handleSubmitVoting = async () => {
+    try {
+      const { data } = await fetcher(
+        "/rooms/votes",
+        "POST",
+        {
+          room_id: rooms.data.id,
+          code: rooms.data.code,
+          candidate: {
+            id: selectedCandidate,
+          },
+        },
+        token,
+      );
+
+      if (data.success) {
+        mutate();
+
+        const votes = JSON.parse(localStorage.getItem("votes"));
+
+        votes.push({
+          room_id: rooms.data.id,
+        });
+
+        localStorage.setItem("votes", JSON.stringify(votes));
+
+        setIsAvailable(false);
+
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    const votes = localStorage.getItem("votes");
+
+    if (votes) {
+      const parse = JSON.parse(votes);
+
+      if (parse.find((vote) => vote.room_id == props.rooms.data.id)) {
+        setIsAvailable(false);
+      } else {
+        setIsAvailable(true);
+      }
+    }
+
+    if (Date.now() > props.rooms.data.end) {
+      setIsAvailable(false);
+    }
+  }, [setIsAvailable]);
 
   if (!isClient) {
     return;
@@ -61,7 +115,10 @@ export default function Voting(props) {
               </Typography>
 
               {/* countdown components */}
-              <CountDown end={rooms.data.end} />
+              <CountDown
+                end={rooms.data.end}
+                handleComplete={() => setIsAvailable(false)}
+              />
             </div>
 
             <div className="grid w-full max-w-[850px] gap-6 justify-self-center">
@@ -72,6 +129,7 @@ export default function Voting(props) {
                     candidate={candidate}
                     index={index}
                     isSelected={selectedCandidate === candidate.id}
+                    isAvailable={isAvailable}
                     onClick={() => {
                       setSelectedCandidate(candidate.id);
                     }}
@@ -80,10 +138,28 @@ export default function Voting(props) {
               })}
             </div>
 
-            <div className="grid gap-4 justify-self-center">
-              <Button size="lg" color="pink" className="text-base capitalize">
-                Kirim voting 🚀
-              </Button>
+            <div className="grid justify-items-center gap-4">
+              {isAvailable ? (
+                <Button
+                  size="lg"
+                  color="pink"
+                  className="text-base capitalize"
+                  onClick={handleSubmitVoting}
+                >
+                  Kirim voting 🚀
+                </Button>
+              ) : (
+                <div className="text-center">
+                  <Typography
+                    variant="h5"
+                    color="red"
+                    className="rounded-xl bg-red-50 px-4 py-2 font-bold"
+                  >
+                    Note: Kesempatan buat vote cuma 1 kali yaaa 😁
+                  </Typography>
+                </div>
+              )}
+
               <Button
                 size="lg"
                 color="pink"

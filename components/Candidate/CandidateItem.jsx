@@ -1,6 +1,4 @@
 import { HiCheck } from "react-icons/hi";
-
-// import material-components
 import { Progress, Typography } from "@material-tailwind/react";
 
 export default function CandidateItem({
@@ -40,16 +38,18 @@ export default function CandidateItem({
         </div>
       </div>
 
-      <div
-        className={`flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg text-[2rem] ${
-          isSelected
-            ? "bg-pink-500 text-white"
-            : "bg-gray-200 text-gray-700 hover:bg-pink-500 hover:text-white"
-        }`}
-        onClick={onClick}
-      >
-        <HiCheck />
-      </div>
+      {isAvailable ? (
+        <div
+          className={`flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg text-[2rem] ${
+            isSelected
+              ? "bg-pink-500 text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-pink-500 hover:text-white"
+          }`}
+          onClick={onClick}
+        >
+          <HiCheck />
+        </div>
+      ) : null}
     </div>
   );
 }

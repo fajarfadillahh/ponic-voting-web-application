@@ -24,7 +24,7 @@ export default function CountDown({ className, end, handleComplete }) {
         Voting akan berakhir dalam:
       </Typography>
 
-      <Countdown date={end} renderer={renderer} />
+      <Countdown date={end} renderer={renderer} onComplete={handleComplete} />
     </div>
   );
 }
