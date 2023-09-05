@@ -18,8 +18,8 @@ import swrfetcher from "@/utils/swrfetcher";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [isEnded, setIsEnded] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(true);
 
   const token = Cookies.get("token");
   const router = useRouter();
@@ -30,9 +30,21 @@ export default function Voting(props) {
     isLoading,
   } = useSWR(`/rooms/?code=${props.code}`, swrfetcher, {
     fallback: props.rooms,
-    refreshInterval: Date.now() < props.rooms.data.end ? 10000 : false,
+    refreshInterval: !isEnded ? 10000 : false,
     revalidateOnFocus: false,
   });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return;
+  }
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   const handleSubmitVoting = async () => {
     try {
@@ -51,50 +63,11 @@ export default function Voting(props) {
 
       if (data.success) {
         mutate();
-
-        const votes = JSON.parse(localStorage.getItem("votes"));
-
-        votes.push({
-          room_id: rooms.data.id,
-        });
-
-        localStorage.setItem("votes", JSON.stringify(votes));
-
-        setIsAvailable(false);
-
-        return;
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    setIsClient(true);
-    const votes = localStorage.getItem("votes");
-
-    if (votes) {
-      const parse = JSON.parse(votes);
-
-      if (parse.find((vote) => vote.room_id == props.rooms.data.id)) {
-        setIsAvailable(false);
-      } else {
-        setIsAvailable(true);
-      }
-    }
-
-    if (Date.now() > props.rooms.data.end) {
-      setIsAvailable(false);
-    }
-  }, [setIsAvailable]);
-
-  if (!isClient) {
-    return;
-  }
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   return (
     <>
@@ -117,7 +90,7 @@ export default function Voting(props) {
               {/* countdown components */}
               <CountDown
                 end={rooms.data.end}
-                handleComplete={() => setIsAvailable(false)}
+                handleComplete={() => setIsEnded(true)}
               />
             </div>
 
@@ -129,7 +102,7 @@ export default function Voting(props) {
                     candidate={candidate}
                     index={index}
                     isSelected={selectedCandidate === candidate.id}
-                    isAvailable={isAvailable}
+                    isAvailable={rooms.data.is_available && !isEnded}
                     onClick={() => {
                       setSelectedCandidate(candidate.id);
                     }}
@@ -139,7 +112,7 @@ export default function Voting(props) {
             </div>
 
             <div className="grid justify-items-center gap-4">
-              {isAvailable ? (
+              {rooms.data.is_available && !isEnded ? (
                 <Button
                   size="lg"
                   color="pink"
@@ -155,7 +128,10 @@ export default function Voting(props) {
                     color="red"
                     className="rounded-xl bg-red-50 px-4 py-2 font-bold"
                   >
-                    Note: Kesempatan buat vote cuma 1 kali yaaa 😁
+                    Note:{" "}
+                    {isEnded
+                      ? "Voting telah berakhir"
+                      : "Kesempatan buat vote cuma 1 kali yaaa 😁"}
                   </Typography>
                 </div>
               )}
