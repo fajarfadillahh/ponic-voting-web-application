@@ -15,6 +15,8 @@ import LoadingScreen from "@/components/Loading/LoadingScreen";
 // import utils
 import fetcher from "@/utils/fetcher";
 import swrfetcher from "@/utils/swrfetcher";
+import toast from "@/utils/toast";
+import messages from "@/utils/messages";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
@@ -48,7 +50,7 @@ export default function Voting(props) {
 
   const handleSubmitVoting = async () => {
     try {
-      const { data } = await fetcher(
+      const { data, status } = await fetcher(
         "/rooms/votes",
         "POST",
         {
@@ -63,6 +65,7 @@ export default function Voting(props) {
 
       if (data.success) {
         mutate();
+        toast(messages[status]`vote`, "success");
       }
     } catch (error) {
       console.log(error);
