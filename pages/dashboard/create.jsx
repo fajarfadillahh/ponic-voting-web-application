@@ -18,6 +18,8 @@ import CandidateForm from "@/components/Candidate/CandidateForm";
 // import utils
 import fetcher from "@/utils/fetcher";
 import LoadingButton from "@/components/Loading/LoadingButton";
+import toast from "@/utils/toast";
+import messages from "@/utils/messages";
 
 export default function CreateVoting() {
   const router = useRouter();
@@ -59,7 +61,7 @@ export default function CreateVoting() {
   const handleCreateVoting = async () => {
     try {
       setIsLoading(true);
-      const { data } = await fetcher(
+      const { data, status } = await fetcher(
         "/rooms",
         "POST",
         {
@@ -72,6 +74,7 @@ export default function CreateVoting() {
       );
 
       if (data.success) {
+        toast(messages[status]`room`, "success");
         return router.push("/dashboard");
       }
     } catch (error) {

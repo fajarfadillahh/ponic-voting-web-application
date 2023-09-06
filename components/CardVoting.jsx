@@ -16,6 +16,8 @@ import DeleteDialog from "@/components/DeleteDialog";
 import { convertTime } from "@/utils/convert";
 import fetcher from "@/utils/fetcher";
 import { useState } from "react";
+import toast from "@/utils/toast";
+import messages from "@/utils/messages";
 
 export default function CardVoting({ room, mutate }) {
   const [open, setOpen] = useState(false);
@@ -26,7 +28,7 @@ export default function CardVoting({ room, mutate }) {
   const handleDeleteVoting = async (room_id, code) => {
     try {
       setIsLoading(true);
-      const { data } = await fetcher(
+      const { data, status } = await fetcher(
         "/rooms",
         "DELETE",
         {
@@ -35,10 +37,10 @@ export default function CardVoting({ room, mutate }) {
         },
         token,
       );
-
       if (data.success) {
         setOpen(false);
         mutate();
+        toast(messages[status]`hapus`, "success");
       }
     } catch (error) {
       setIsLoading(false);
