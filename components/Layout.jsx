@@ -9,7 +9,11 @@ export default function Layout({ children, className }) {
   const { pathname } = router;
 
   // hide components
-  const hideComponentsOnPages = ["/auth/login", "/auth/register"];
+  const hideComponentsOnPages = [
+    "/auth/login",
+    "/auth/register",
+    "/rooms/result",
+  ];
 
   // current page
   const hideNavbar = !hideComponentsOnPages.includes(pathname);

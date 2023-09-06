@@ -47,6 +47,7 @@ export default function Home() {
                   size="lg"
                   color="pink"
                   className="w-[160px] text-base capitalize"
+                  onClick={() => router.push("/dashboard/create")}
                 >
                   Buat voting
                 </Button>
