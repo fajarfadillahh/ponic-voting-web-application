@@ -1,8 +1,17 @@
 import Toast from "react-hot-toast";
-import Alert from "@/components/Alert";
 
 export default function toast(message, type) {
-  Toast.custom(() => {
-    return <Alert message={message} type={type} />;
-  });
+  if (type == "success") {
+    Toast.success(message, {
+      duration: 3500,
+      position: "bottom-right",
+    });
+  }
+
+  if (type == "error") {
+    Toast.error(message, {
+      duration: 3500,
+      position: "bottom-right",
+    });
+  }
 }

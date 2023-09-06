@@ -23,11 +23,7 @@ export default function App({ Component, pageProps }) {
 
         if (!token) {
           toast(messages.expired, "error");
-
-          setTimeout(() => {
-            window.location.href = "/auth/login";
-          }, 1000);
-          return;
+          return (window.location.href = "/auth/login");
         }
       });
     }
