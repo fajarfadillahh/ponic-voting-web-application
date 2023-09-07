@@ -6,8 +6,24 @@ import { Button, Typography } from "@material-tailwind/react";
 // import componrnts
 import Layout from "@/components/Layout";
 
-export default function Waiting() {
+// import utils
+import { convertTime } from "@/utils/convert";
+import { useState, useEffect } from "react";
+
+export default function Waiting({ start, code }) {
+  const [distance, setDistance] = useState(start - Date.now());
   const router = useRouter();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (distance <= 0) {
+        return (window.location.href = `/rooms/${code}`);
+      }
+      setDistance(start - Date.now());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [distance, start, code]);
 
   return (
     <>
@@ -41,7 +57,7 @@ export default function Waiting() {
               >
                 Voting ini akan di mulai{" "}
                 <span className="font-extrabold text-pink-500">
-                  Rabu 06/09/2023 10:00
+                  {convertTime(Number(start))}
                 </span>
                 . Jadi dipersilakan untuk <br /> beli cemilan dan minuman untuk
                 menemani kamu disini.
@@ -60,4 +76,31 @@ export default function Waiting() {
       </Layout>
     </>
   );
+}
+
+export function getServerSideProps({ query }) {
+  const { start, code } = query;
+
+  if (!start || !code) {
+    return {
+      redirect: {
+        destination: "/rooms",
+      },
+    };
+  }
+
+  if (Date.now() > start) {
+    return {
+      redirect: {
+        destination: `/rooms/${code}`,
+      },
+    };
+  }
+
+  return {
+    props: {
+      start,
+      code,
+    },
+  };
 }

@@ -161,7 +161,7 @@ export async function getServerSideProps({ params, req }) {
   const token = req.cookies.token;
 
   try {
-    const { data, status } = await fetcher(
+    const { data } = await fetcher(
       `/rooms?code=${params.code}`,
       "GET",
       null,
@@ -169,6 +169,14 @@ export async function getServerSideProps({ params, req }) {
     );
 
     if (data.success) {
+      if (Date.now() < data.data.start) {
+        return {
+          redirect: {
+            destination: `/rooms/waiting?start=${data.data.start}&code=${params.code}`,
+          },
+        };
+      }
+
       return {
         props: {
           rooms: data,
@@ -176,12 +184,6 @@ export async function getServerSideProps({ params, req }) {
         },
       };
     }
-
-    return {
-      redirect: {
-        destination: `/ups?code=${status}&message=${data.errors[0].message}`,
-      },
-    };
   } catch (error) {
     if (error.response.status == 404) {
       return {
