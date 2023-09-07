@@ -9,21 +9,22 @@ import Layout from "@/components/Layout";
 // import utils
 import { convertTime } from "@/utils/convert";
 import { useState, useEffect } from "react";
+import fetcher from "@/utils/fetcher";
 
-export default function Waiting({ start, code }) {
-  const [distance, setDistance] = useState(start - Date.now());
+export default function Waiting({ room }) {
+  const [distance, setDistance] = useState(room.data.start - Date.now());
   const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (distance <= 0) {
-        return (window.location.href = `/rooms/${code}`);
+        return (window.location.href = `/rooms/${room.data.code}`);
       }
-      setDistance(start - Date.now());
+      setDistance(room.data.start - Date.now());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [distance, start, code]);
+  }, [distance, room.data.start, room.data.code]);
 
   return (
     <>
@@ -57,7 +58,7 @@ export default function Waiting({ start, code }) {
               >
                 Voting ini akan di mulai{" "}
                 <span className="font-extrabold text-pink-500">
-                  {convertTime(Number(start))}
+                  {convertTime(room.data.start)}
                 </span>
                 . Jadi dipersilakan untuk <br /> beli cemilan dan minuman untuk
                 menemani kamu disini.
@@ -78,10 +79,11 @@ export default function Waiting({ start, code }) {
   );
 }
 
-export function getServerSideProps({ query }) {
-  const { start, code } = query;
+export async function getServerSideProps({ query, req }) {
+  const token = req.cookies.token;
+  const { code } = query;
 
-  if (!start || !code) {
+  if (!code) {
     return {
       redirect: {
         destination: "/rooms",
@@ -89,18 +91,35 @@ export function getServerSideProps({ query }) {
     };
   }
 
-  if (Date.now() > start) {
+  try {
+    const { data } = await fetcher(`/rooms?code=${code}`, "GET", null, token);
+
+    if (Date.now() > data.data.start) {
+      return {
+        redirect: {
+          destination: `/rooms/${code}`,
+        },
+      };
+    }
+
+    return {
+      props: {
+        room: data,
+      },
+    };
+  } catch (error) {
+    if (error.response.status == 404) {
+      return {
+        redirect: {
+          destination: "/rooms?code=404",
+        },
+      };
+    }
+
     return {
       redirect: {
-        destination: `/rooms/${code}`,
+        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
       },
     };
   }
-
-  return {
-    props: {
-      start,
-      code,
-    },
-  };
 }

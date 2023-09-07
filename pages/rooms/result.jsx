@@ -6,8 +6,16 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 
-export default function Result() {
+// import utils
+import fetcher from "@/utils/fetcher";
+import { convertTime } from "@/utils/convert";
+
+export default function Result({ room }) {
   const router = useRouter();
+
+  const winner = room.data.candidates.sort(
+    (a, b) => b.percentage - a.percentage,
+  );
 
   return (
     <>
@@ -43,7 +51,7 @@ export default function Result() {
                 color="blue-gray"
                 className="min-w-[645px] border-b-4 border-pink-500 text-[56px] font-extrabold capitalize"
               >
-                "Fajar Fadillah Agustian"
+                &quot;{winner[0].name}&quot;
               </Typography>
             </div>
 
@@ -56,14 +64,14 @@ export default function Result() {
                 Terima kasih, telah berpartisipasi pada voting yang berjudul
                 dibawah ini, <br /> dan dilaksanakan pada{" "}
                 <span className="font-extrabold text-pink-500">
-                  Rabu 06/09/2023 10:00
+                  {convertTime(room.data.start)}
                 </span>
               </Typography>
               <Typography
                 color="blue-gray"
                 className="max-w-[580px] text-[28px] font-extrabold capitalize"
               >
-                “Pemilihan Ketua Himpunan Mahasiswa Universitas Indonesia”
+                &quot;{room.data.name}&quot;
               </Typography>
             </div>
 
@@ -80,4 +88,52 @@ export default function Result() {
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps({ query, req }) {
+  const token = req.cookies.token;
+
+  const { code } = query;
+
+  if (!code) {
+    return {
+      redirect: {
+        destination: `/rooms`,
+      },
+    };
+  }
+
+  try {
+    const { data } = await fetcher(`/rooms?code=${code}`, "GET", null, token);
+
+    if (data.success) {
+      if (Date.now() < data.data.end) {
+        return {
+          redirect: {
+            destination: `/rooms/${code}`,
+          },
+        };
+      }
+
+      return {
+        props: {
+          room: data,
+        },
+      };
+    }
+  } catch (error) {
+    if (error.response.status == 404) {
+      return {
+        redirect: {
+          destination: "/rooms?code=404",
+        },
+      };
+    }
+
+    return {
+      redirect: {
+        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+      },
+    };
+  }
 }

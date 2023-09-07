@@ -20,7 +20,6 @@ import messages from "@/utils/messages";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [isEnded, setIsEnded] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   const token = Cookies.get("token");
@@ -32,7 +31,7 @@ export default function Voting(props) {
     isLoading,
   } = useSWR(`/rooms/?code=${props.code}`, swrfetcher, {
     fallback: props.rooms,
-    refreshInterval: !isEnded ? 10000 : false,
+    refreshInterval: 10000,
     revalidateOnFocus: false,
   });
 
@@ -93,7 +92,9 @@ export default function Voting(props) {
               {/* countdown components */}
               <CountDown
                 end={rooms.data.end}
-                handleComplete={() => setIsEnded(true)}
+                handleComplete={() =>
+                  (window.location.href = `/rooms/result?code=${rooms.data.code}`)
+                }
               />
             </div>
 
@@ -105,7 +106,7 @@ export default function Voting(props) {
                     candidate={candidate}
                     index={index}
                     isSelected={selectedCandidate === candidate.id}
-                    isAvailable={rooms.data.is_available && !isEnded}
+                    isAvailable={rooms.data.is_available}
                     onClick={() => {
                       setSelectedCandidate(candidate.id);
                     }}
@@ -115,7 +116,7 @@ export default function Voting(props) {
             </div>
 
             <div className="grid justify-items-center gap-4">
-              {rooms.data.is_available && !isEnded ? (
+              {rooms.data.is_available ? (
                 <Button
                   size="lg"
                   color="pink"
@@ -131,10 +132,7 @@ export default function Voting(props) {
                     color="red"
                     className="rounded-xl bg-red-50 px-4 py-2 font-bold"
                   >
-                    Note:{" "}
-                    {isEnded
-                      ? "Voting telah berakhir"
-                      : "Kesempatan buat vote cuma 1 kali yaaa 😁"}
+                    Note: Kesempatan buat vote cuma 1 kali yaaa 😁
                   </Typography>
                 </div>
               )}
@@ -172,7 +170,15 @@ export async function getServerSideProps({ params, req }) {
       if (Date.now() < data.data.start) {
         return {
           redirect: {
-            destination: `/rooms/waiting?start=${data.data.start}&code=${params.code}`,
+            destination: `/rooms/waiting?code=${params.code}`,
+          },
+        };
+      }
+
+      if (Date.now() > data.data.end) {
+        return {
+          redirect: {
+            destination: `/rooms/result?code=${params.code}`,
           },
         };
       }

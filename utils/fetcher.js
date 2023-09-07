@@ -20,8 +20,6 @@ async function fetcher(url, method, data = null, token = null) {
     });
   }
 
-  process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
   return axios(config);
 }
 
