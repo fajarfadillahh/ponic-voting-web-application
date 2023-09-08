@@ -3,12 +3,12 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-// import material-components
-import { Button, Typography } from "@material-tailwind/react";
+import { HiMenuAlt2 } from "react-icons/hi";
+import { Button, IconButton, Typography } from "@material-tailwind/react";
 
 export default function Navbar() {
   const [isClient, setIsClient] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const router = useRouter();
   const token = Cookies.get("token");
   const fullname = Cookies.get("fullname");
@@ -31,7 +31,11 @@ export default function Navbar() {
           </Typography>
         </Link>
 
-        <div className="inline-flex items-center gap-4">
+        <div
+          className={`fixed inset-x-0 top-24 flex w-full origin-top flex-col items-center gap-4 bg-white px-6 py-8 shadow-[0_4px_8px_rgba(0,0,0,0.05)] transition sm:static sm:top-0 sm:w-auto sm:scale-y-100 sm:flex-row sm:bg-transparent sm:p-0 sm:shadow-none ${
+            navbarOpen ? "scale-y-100" : "scale-y-0"
+          }`}
+        >
           <span className="font-semibold text-gray-900">
             {fullname ? fullname : null}
           </span>
@@ -40,7 +44,7 @@ export default function Navbar() {
             <Button
               size="lg"
               color="pink"
-              className="w-[120px] text-base capitalize"
+              className="w-full text-base capitalize sm:w-[120px]"
               onClick={() => router.push("/auth/login")}
             >
               Masuk
@@ -49,7 +53,7 @@ export default function Navbar() {
             <Button
               size="lg"
               color="pink"
-              className="w-[120px] text-base capitalize"
+              className="w-full text-base capitalize sm:w-[120px]"
               onClick={() => {
                 Cookies.remove("token");
                 Cookies.remove("fullname");
@@ -60,6 +64,16 @@ export default function Navbar() {
             </Button>
           )}
         </div>
+
+        <IconButton
+          size="sm"
+          variant="outlined"
+          color="gray"
+          className="sm:hidden"
+          onClick={() => setNavbarOpen(!navbarOpen)}
+        >
+          <HiMenuAlt2 className="text-[1.2rem]" />
+        </IconButton>
       </div>
     </nav>
   );
