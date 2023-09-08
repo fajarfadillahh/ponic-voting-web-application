@@ -31,20 +31,18 @@ export default function NotFound() {
 
             <div className="text-center">
               <Typography
-                variant="h2"
                 color="blue-gray"
-                className="mb-3 font-extrabold capitalize"
+                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[42px]"
               >
                 Opsss, Halaman gak ketemu 😲
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-8 font-medium"
+                className="mx-auto mb-8 max-w-[420px] font-medium"
               >
-                Halaman yang kamu cari gak ketemu nih. Pastiin URL yang
-                <br />
-                kamu masukin udah bener yahh.
+                Halaman yang kamu cari gak ketemu nih. Pastiin URL yang kamu
+                masukin udah bener yahh.
               </Typography>
               <Button
                 size="lg"

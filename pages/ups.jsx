@@ -30,21 +30,18 @@ export default function SomethingWrong() {
 
             <div className="text-center">
               <Typography
-                variant="h2"
                 color="blue-gray"
-                className="mb-3 font-extrabold capitalize"
+                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[42px]"
               >
                 Hmm, ada yang salah deh 🤔
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-8 font-medium"
+                className="mx-auto mb-8 max-w-[460px] font-medium"
               >
                 Sepertinya terjadi kesalahan, silakan refresh/muat ulang halaman
-                ini
-                <br />
-                atau kembali ke halaman utama.
+                ini atau kembali ke halaman utama.
               </Typography>
               <Button
                 size="lg"
