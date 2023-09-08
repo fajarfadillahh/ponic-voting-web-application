@@ -24,12 +24,11 @@ export default function Home() {
       <Layout>
         {/* ==== hero section ==== */}
         <section className="pb-16 pt-40">
-          <div className="container grid grid-cols-2 items-center gap-8">
-            <div>
+          <div className="container grid gap-8 xl:grid-cols-2 xl:items-center">
+            <div className="justify-self-center text-center xl:justify-self-start xl:text-left">
               <Typography
-                variant="h1"
                 color="blue-gray"
-                className="mb-2 max-w-[520px] font-extrabold capitalize"
+                className="mb-2 max-w-[520px] text-[32px] font-extrabold capitalize sm:text-[48px]"
               >
                 Tentukan pilihan kamu dari sekarang. 🚀
               </Typography>
@@ -42,11 +41,11 @@ export default function Home() {
                 user-friendly yang dirancang untuk memenuhi segala jenis
                 kebutuhan pemungutan suara anda.
               </Typography>
-              <div className="inline-flex items-center gap-3">
+              <div className="flex flex-col items-center gap-3 xl:flex-row">
                 <Button
                   size="lg"
                   color="pink"
-                  className="w-[160px] text-base capitalize"
+                  className="w-full text-base capitalize sm:w-[225px] xl:w-[160px]"
                   onClick={() => router.push("/dashboard/create")}
                 >
                   Buat voting
@@ -55,7 +54,7 @@ export default function Home() {
                   size="lg"
                   variant="text"
                   color="pink"
-                  className="inline-flex items-center gap-1 text-base capitalize"
+                  className="inline-flex w-full items-center justify-center gap-1 text-base capitalize sm:w-[225px]"
                   onClick={() => router.push("/dashboard")}
                 >
                   Halaman dashboard
@@ -69,6 +68,7 @@ export default function Home() {
               alt="hero img"
               width={580}
               height={475}
+              className="justify-self-center"
             />
           </div>
         </section>
