@@ -11,7 +11,7 @@ export default function CandidateForm({
   handleCandidateName,
 }) {
   return (
-    <div className="relative grid w-[405px] gap-8 rounded-lg border-[2px] border-gray-200 p-6">
+    <div className="relative grid w-full gap-8 rounded-lg border-[2px] border-gray-200 p-6 sm:w-[405px]">
       <Tooltip
         content="Hapus kandidat/opsi"
         placement="top"

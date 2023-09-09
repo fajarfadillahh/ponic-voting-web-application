@@ -95,22 +95,21 @@ export default function EditVoting({ rooms }) {
       <Layout>
         <section className="pb-16 pt-40">
           <div className="container grid gap-14">
-            <div className="grid grid-cols-2 items-center gap-8">
+            <div className="grid items-center gap-8 lg:grid-cols-2">
               <div>
                 <Typography
-                  variant="h1"
                   color="blue-gray"
-                  className="mb-2 font-extrabold capitalize"
+                  className="mb-2 text-[32px] font-extrabold capitalize sm:text-[48px]"
                 >
                   Perbarui data <br /> anda di sini 🙌
                 </Typography>
                 <Typography
                   variant="paragraph"
                   color="gray"
-                  className="mb-8 font-medium"
+                  className="mb-8 max-w-[320px] font-medium"
                 >
-                  Di halaman ini, anda dapat memperbarui <br /> informasi
-                  penting dengan mudah.
+                  Di halaman ini, anda dapat memperbarui informasi penting
+                  dengan mudah.
                 </Typography>
                 <Button
                   size="lg"
@@ -129,6 +128,7 @@ export default function EditVoting({ rooms }) {
                 width={580}
                 height={420}
                 alt="hero img"
+                className="hidden lg:block"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function EditVoting({ rooms }) {
                   Detail voting
                 </Typography>
 
-                <div className="grid max-w-[600px] gap-4">
+                <div className="grid max-w-[600px] gap-6">
                   <div className="grid gap-1">
                     <Typography
                       variant="paragraph"
@@ -160,12 +160,12 @@ export default function EditVoting({ rooms }) {
                     />
                   </div>
 
-                  <div className="inline-flex items-center justify-between gap-8">
+                  <div className="inline-flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between md:justify-normal">
                     <div className="grid gap-1">
                       <Typography
                         variant="paragraph"
                         color="blue-gray"
-                        className="w-[280px] font-bold capitalize"
+                        className="w-full font-bold capitalize md:w-[280px]"
                       >
                         Waktu mulai
                       </Typography>
@@ -187,7 +187,7 @@ export default function EditVoting({ rooms }) {
                       <Typography
                         variant="paragraph"
                         color="blue-gray"
-                        className="w-[280px] font-bold capitalize"
+                        className="w-full font-bold capitalize md:w-[280px]"
                       >
                         Waktu selesai
                       </Typography>
@@ -213,7 +213,7 @@ export default function EditVoting({ rooms }) {
                   Kandidat / opsi
                 </Typography>
 
-                <div className="flex flex-wrap items-start gap-5">
+                <div className="flex flex-wrap items-start gap-5 2xl:justify-start">
                   {candidates.map((candidate, index) => (
                     <CandidateForm
                       key={index}
