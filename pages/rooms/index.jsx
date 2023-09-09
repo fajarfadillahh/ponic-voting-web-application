@@ -27,15 +27,14 @@ export default function Participant() {
               width={400}
               height={330}
               alt="img"
-              className="justify-self-center"
+              className="block justify-self-center"
             />
 
             <div className="grid gap-8">
               <div className="text-center">
                 <Typography
-                  variant="h1"
                   color="blue-gray"
-                  className="mb-2 font-extrabold capitalize"
+                  className="mb-2 text-[32px] font-extrabold capitalize sm:text-[48px]"
                 >
                   Ayo, ikutan voting 🚀
                 </Typography>
@@ -49,7 +48,7 @@ export default function Participant() {
                 </Typography>
               </div>
 
-              <div className="grid w-[420px] gap-6 justify-self-center">
+              <div className="grid w-full gap-6 justify-self-center sm:w-[420px]">
                 <div className="grid gap-4">
                   <Form
                     type="text"
