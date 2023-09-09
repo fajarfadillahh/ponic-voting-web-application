@@ -41,9 +41,8 @@ export default function Dashboard(props) {
           <div className="container grid gap-16">
             <div className="justify-self-center text-center">
               <Typography
-                variant="h1"
                 color="blue-gray"
-                className="max-w-[750px] font-extrabold capitalize"
+                className="max-w-[750px] text-[32px] font-extrabold capitalize sm:text-[48px]"
               >
                 Pusat kontrol pemungutan suara online anda 🤖️
               </Typography>
@@ -52,26 +51,25 @@ export default function Dashboard(props) {
             <div className="grid gap-8">
               <div className="grid gap-4">
                 <Typography
-                  variant="h4"
                   color="blue-gray"
-                  className="font-bold capitalize"
+                  className="text-[20px] font-bold capitalize sm:text-[24px]"
                 >
                   List voting punya kamu
                 </Typography>
 
-                <div className="flex items-center gap-8">
+                <div className="flex flex-col items-center gap-8 md:flex-row">
                   <Form
                     type="text"
                     placeholder="Cari voting yang sudah dibuat..."
                     className="w-full"
                   />
 
-                  <div className="inline-flex items-center gap-8">
+                  <div className="flex w-full flex-col items-center gap-4 md:w-auto md:flex-row">
                     <Button
                       size="lg"
                       color="pink"
                       variant="outlined"
-                      className="h-[52px] w-[160px] text-base capitalize"
+                      className="h-[52px] w-full text-base capitalize md:w-[160px]"
                       onClick={() => router.push("/rooms")}
                     >
                       Ikutan voting
@@ -79,7 +77,7 @@ export default function Dashboard(props) {
                     <Button
                       size="lg"
                       color="pink"
-                      className="w-[160px] text-base capitalize"
+                      className="w-full text-base capitalize md:w-[160px]"
                       onClick={() => router.push("/dashboard/create")}
                     >
                       Buat voting
