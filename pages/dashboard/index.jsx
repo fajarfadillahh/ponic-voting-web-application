@@ -86,13 +86,12 @@ export default function Dashboard(props) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-start gap-8">
+              <div className="flex flex-wrap items-start justify-center gap-8 2xl:justify-start">
                 {rooms.data.length == 0 ? (
                   <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
                     <Typography
-                      variant="h5"
                       color="gray"
-                      className="font-semibold"
+                      className="text-base font-semibold sm:text-[20px]"
                     >
                       Kamu belum punya voting nih 😚
                     </Typography>
