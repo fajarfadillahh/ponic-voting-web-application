@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function fetcher(url, method, data = null, token = null) {
   const defaultObject = {
-    url: `https://wildanlab.tech/api/v1${url}`,
+    url: `https://api.ponic.site${url}`,
     method,
   };
 
