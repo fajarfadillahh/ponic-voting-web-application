@@ -9,7 +9,7 @@ export default function CandidateItem({
   isAvailable,
 }) {
   return (
-    <div className="flex w-full items-center justify-between gap-10 rounded-lg border-[2px] border-gray-200 p-6">
+    <div className="flex w-full flex-col items-center justify-between gap-10 rounded-lg border-[2px] border-gray-200 p-6 sm:flex-row">
       <div className="flex w-full items-start gap-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-200 text-[24px] font-bold text-gray-900">
           {index + 1}
@@ -17,7 +17,10 @@ export default function CandidateItem({
 
         <div className="flex w-full flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <Typography color="blue-gray" className="text-[28px] font-bold">
+            <Typography
+              color="blue-gray"
+              className="text-[22px] font-bold sm:text-[28px]"
+            >
               {candidate.name}
             </Typography>
             <Typography variant="small" color="gray" className="font-medium">
@@ -40,7 +43,7 @@ export default function CandidateItem({
 
       {isAvailable ? (
         <div
-          className={`flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg text-[2rem] ${
+          className={`flex aspect-square h-[52px] w-full cursor-pointer items-center justify-center rounded-lg text-[2rem] sm:h-[64px] sm:w-[64px] ${
             isSelected
               ? "bg-pink-500 text-white"
               : "bg-gray-200 text-gray-700 hover:bg-pink-500 hover:text-white"

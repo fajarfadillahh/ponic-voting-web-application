@@ -82,9 +82,8 @@ export default function Voting(props) {
           <div className="container grid gap-12">
             <div className="grid gap-6 justify-self-center text-center">
               <Typography
-                variant="h1"
                 color="blue-gray"
-                className="mx-auto max-w-[920px] font-extrabold capitalize"
+                className="mx-auto max-w-[920px] text-[32px] font-extrabold capitalize sm:text-[48px]"
               >
                 {rooms.data.name}
               </Typography>

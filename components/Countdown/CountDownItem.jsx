@@ -9,7 +9,7 @@ export default function CountDownItem({ label, value }) {
       <div className="flex flex-col items-center">
         <Typography
           color="blue-gray"
-          className="-mb-4 text-[56px] font-extrabold"
+          className="-mb-2 text-[32px] font-extrabold sm:-mb-4 sm:text-[48px]"
         >
           {zeroPad(value, 2)}
         </Typography>
