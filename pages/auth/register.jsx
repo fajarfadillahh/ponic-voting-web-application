@@ -72,7 +72,7 @@ export default function Register() {
             </Typography>
           </div>
 
-          <div className="grid w-[430px] gap-8 justify-self-center">
+          <div className="mx-auto grid w-full gap-8 sm:max-w-[430px]">
             <form className="grid w-full gap-8">
               <div className="flex flex-col gap-3">
                 <Form
