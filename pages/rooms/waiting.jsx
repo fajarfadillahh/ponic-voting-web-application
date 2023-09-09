@@ -45,22 +45,21 @@ export default function Waiting({ room }) {
 
             <div className="text-center">
               <Typography
-                variant="h2"
                 color="blue-gray"
-                className="mb-3 font-extrabold capitalize"
+                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[36px]"
               >
                 Ehem, votingnya belum dimulai nih 😚
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-8 font-medium"
+                className="mx-auto mb-8 max-w-[550px] font-medium"
               >
                 Voting ini akan di mulai{" "}
                 <span className="font-extrabold text-pink-500">
                   {convertTime(room.data.start)}
                 </span>
-                . Jadi dipersilakan untuk <br /> beli cemilan dan minuman untuk
+                . Jadi dipersilakan untuk beli cemilan dan minuman untuk
                 menemani kamu disini.
               </Typography>
               <Button

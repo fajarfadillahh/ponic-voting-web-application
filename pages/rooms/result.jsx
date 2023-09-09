@@ -27,7 +27,7 @@ export default function Result({ room }) {
         <div className="absolute -left-[160px] -top-[160px] h-[320px] w-[320px] rounded-full bg-pink-500 blur-[120px]" />
         <div className="absolute -bottom-[160px] -right-[160px] h-[320px] w-[320px] rounded-full bg-yellow-500 blur-[90px]" />
 
-        <section className="container grid gap-24">
+        <section className="container relative grid gap-24">
           <div className="inline-flex items-center gap-2 justify-self-center">
             <Image src="/assets/icon.svg" alt="icon" width={48} height={48} />
             <Typography
@@ -39,7 +39,7 @@ export default function Result({ room }) {
           </div>
 
           <div className="grid justify-items-center gap-16 justify-self-center">
-            <div className="text-center">
+            <div className="w-full text-center">
               <Typography
                 variant="paragraph"
                 color="gray"
@@ -49,7 +49,7 @@ export default function Result({ room }) {
               </Typography>
               <Typography
                 color="blue-gray"
-                className="min-w-[645px] border-b-4 border-pink-500 text-[56px] font-extrabold capitalize"
+                className="w-full border-b-4 border-pink-500 text-[56px] font-extrabold capitalize 2xl:w-[720px]"
               >
                 &quot;{winner[0].name}&quot;
               </Typography>
@@ -59,10 +59,10 @@ export default function Result({ room }) {
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-2 font-medium"
+                className="mb-2 max-w-[525px] font-medium"
               >
                 Terima kasih, telah berpartisipasi pada voting yang berjudul
-                dibawah ini, <br /> dan dilaksanakan pada{" "}
+                dibawah ini, dan dilaksanakan pada{" "}
                 <span className="font-extrabold text-pink-500">
                   {convertTime(room.data.start)}
                 </span>
