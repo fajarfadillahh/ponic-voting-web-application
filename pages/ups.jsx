@@ -8,8 +8,21 @@ import { Button, Typography } from "@material-tailwind/react";
 // import components
 import Layout from "@/components/Layout";
 
+// import utils
+import toast from "@/utils/toast";
+import messages from "@/utils/messages";
+import { useEffect } from "react";
+
 export default function SomethingWrong() {
   const router = useRouter();
+
+  const { code } = router.query;
+
+  useEffect(() => {
+    if (code) {
+      toast(messages[code], "error");
+    }
+  }, [code]);
 
   return (
     <>

@@ -11,6 +11,7 @@ import Layout from "@/components/Layout";
 import CountDown from "@/components/Countdown/CountDown";
 import CandidateItem from "@/components/Candidate/CandidateItem";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
+import LoadingButton from "@/components/Loading/LoadingButton";
 
 // import utils
 import fetcher from "@/utils/fetcher";
@@ -21,6 +22,7 @@ import messages from "@/utils/messages";
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const token = Cookies.get("token");
   const router = useRouter();
@@ -49,6 +51,7 @@ export default function Voting(props) {
 
   const handleSubmitVoting = async () => {
     try {
+      setLoading(true);
       const { data, status } = await fetcher(
         "/rooms/votes",
         "POST",
@@ -65,9 +68,19 @@ export default function Voting(props) {
       if (data.success) {
         mutate();
         toast(messages[status]`vote`, "success");
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+
+      const response = error.response;
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   };
 
@@ -116,14 +129,20 @@ export default function Voting(props) {
 
             <div className="grid justify-items-center gap-4">
               {rooms.data.is_available ? (
-                <Button
-                  size="lg"
-                  color="pink"
-                  className="min-w-[241px] text-base capitalize"
-                  onClick={handleSubmitVoting}
-                >
-                  Kirim voting 🚀
-                </Button>
+                <>
+                  {loading ? (
+                    <LoadingButton className="h-[52px] w-[241px]" />
+                  ) : (
+                    <Button
+                      size="lg"
+                      color="pink"
+                      className="min-w-[241px] text-base capitalize"
+                      onClick={handleSubmitVoting}
+                    >
+                      Kirim voting 🚀
+                    </Button>
+                  )}
+                </>
               ) : (
                 <div className="text-center">
                   <Typography
@@ -200,7 +219,7 @@ export async function getServerSideProps({ params, req }) {
 
     return {
       redirect: {
-        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+        destination: `/ups?code=${error.response.status}`,
       },
     };
   }

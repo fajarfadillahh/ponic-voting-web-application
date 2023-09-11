@@ -12,6 +12,7 @@ import LoadingButton from "@/components/Loading/LoadingButton";
 
 // import utils
 import fetcher from "@/utils/fetcher";
+import toast from "@/utils/toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -52,7 +53,12 @@ export default function Login() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
+      const response = error.response;
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   }
 

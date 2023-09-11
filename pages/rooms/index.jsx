@@ -2,16 +2,26 @@ import Head from "next/head";
 import Image from "next/image";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
+import toast from "@/utils/toast";
+import messages from "@/utils/messages";
 
 export default function Participant() {
   const [code, setCode] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.code) {
+      console.log("ok");
+      toast(messages[router.query.code], "error");
+      router.replace("/rooms");
+    }
+  }, [router]);
 
   return (
     <>

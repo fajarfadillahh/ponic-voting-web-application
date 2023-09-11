@@ -44,7 +44,12 @@ export default function CardVoting({ room, mutate }) {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
+      const response = error.response;
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   };
 
