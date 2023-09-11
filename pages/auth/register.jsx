@@ -3,6 +3,7 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
+import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 // import components
 import Layout from "@/components/Layout";
@@ -16,7 +17,19 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
+  const [typePassword, setTypePassword] = useState("password");
+  const [icon, setIcon] = useState(<HiOutlineEyeOff />);
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleShowPassword = () => {
+    if (typePassword === "password") {
+      setIcon(<HiOutlineEye />);
+      setTypePassword("text");
+    } else {
+      setIcon(<HiOutlineEyeOff />);
+      setTypePassword("password");
+    }
+  };
 
   async function handleRegister() {
     try {
@@ -87,12 +100,20 @@ export default function Register() {
                   value={fullname}
                   onChange={(e) => setFullname(e.target.value)}
                 />
-                <Form
-                  type="password"
-                  placeholder="Kata sandi"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="relative flex w-full items-center">
+                  <Form
+                    type={typePassword}
+                    placeholder="Kata sandi"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div
+                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300"
+                    onClick={handleShowPassword}
+                  >
+                    {icon}
+                  </div>
+                </div>
               </div>
 
               {isLoading ? (
