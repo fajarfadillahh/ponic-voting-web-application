@@ -28,14 +28,14 @@ export default function Home() {
             <div className="justify-self-center text-center xl:justify-self-start xl:text-left">
               <Typography
                 color="blue-gray"
-                className="mb-2 max-w-[520px] text-[32px] font-extrabold capitalize sm:text-[48px]"
+                className="mb-2 max-w-[520px] text-[32px] font-extrabold capitalize dark:text-white sm:text-[48px]"
               >
                 Tentukan pilihan kamu dari sekarang. 🚀
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-8 max-w-[490px] font-medium"
+                className="mb-8 max-w-[490px] font-medium dark:text-white"
               >
                 Ponic adalah platform voting berbasis web yang inovatif dan
                 user-friendly yang dirancang untuk memenuhi segala jenis

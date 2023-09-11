@@ -44,14 +44,14 @@ export default function SomethingWrong() {
             <div className="text-center">
               <Typography
                 color="blue-gray"
-                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[42px]"
+                className="mb-3 text-[32px] font-extrabold capitalize dark:text-white sm:text-[42px]"
               >
                 Hmm, ada yang salah deh 🤔
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mx-auto mb-8 max-w-[460px] font-medium"
+                className="mx-auto mb-8 max-w-[460px] font-medium dark:text-white"
               >
                 Sepertinya terjadi kesalahan, silakan refresh/muat ulang halaman
                 ini atau kembali ke halaman utama.

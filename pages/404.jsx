@@ -32,14 +32,14 @@ export default function NotFound() {
             <div className="text-center">
               <Typography
                 color="blue-gray"
-                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[42px]"
+                className="mb-3 text-[32px] font-extrabold capitalize dark:text-white sm:text-[42px]"
               >
                 Opsss, Halaman gak ketemu 😲
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mx-auto mb-8 max-w-[420px] font-medium"
+                className="mx-auto mb-8 max-w-[420px] font-medium dark:text-white"
               >
                 Halaman yang kamu cari gak ketemu nih. Pastiin URL yang kamu
                 masukin udah bener yahh.
