@@ -94,13 +94,15 @@ export default function CardVoting({ room, mutate }) {
                   unmount: { scale: 0, y: 25 },
                 }}
               >
-                <Typography
-                  variant="h5"
-                  color="blue-gray"
-                  className="line-clamp-2 font-bold capitalize"
-                >
-                  {room.name}
-                </Typography>
+                <Link href={`/rooms/${room.code}`}>
+                  <Typography
+                    variant="h5"
+                    color="blue-gray"
+                    className="line-clamp-2 font-bold capitalize hover:text-pink-500"
+                  >
+                    {room.name}
+                  </Typography>
+                </Link>
               </Tooltip>
             </div>
 
