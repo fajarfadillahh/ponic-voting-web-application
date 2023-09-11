@@ -35,7 +35,7 @@ export default function Status({ start, end }) {
     return (
       <Typography
         variant="small"
-        className={`${baseStyle} bg-green-100 text-green-600`}
+        className={`${baseStyle} bg-green-100 text-green-600 dark:bg-green-100/20`}
       >
         Selesai
       </Typography>
@@ -44,7 +44,7 @@ export default function Status({ start, end }) {
     return (
       <Typography
         variant="small"
-        className={`${baseStyle} bg-orange-100 text-orange-600`}
+        className={`${baseStyle} bg-orange-100 text-orange-600 dark:bg-orange-100/20`}
       >
         Berjalan
       </Typography>
@@ -53,7 +53,7 @@ export default function Status({ start, end }) {
     return (
       <Typography
         variant="small"
-        className={`${baseStyle} bg-gray-200 text-gray-600`}
+        className={`${baseStyle} bg-gray-200 text-gray-700 dark:bg-white/10`}
       >
         Menunggu
       </Typography>

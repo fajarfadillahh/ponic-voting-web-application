@@ -54,7 +54,7 @@ export default function CardVoting({ room, mutate }) {
   };
 
   return (
-    <div className="group relative w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)]">
+    <div className="group relative w-full max-w-[405px] rounded-lg border-[2px] border-gray-200 p-6 transition hover:border-pink-500 hover:shadow-[4px_4px_20px_rgba(233,30,99,0.2)] dark:border-gray-900 dark:hover:border-pink-500">
       <Tooltip
         content="Ikutan voting"
         placement="top"
@@ -98,7 +98,7 @@ export default function CardVoting({ room, mutate }) {
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="line-clamp-2 font-bold capitalize hover:text-pink-500"
+                    className="line-clamp-2 font-bold capitalize hover:text-pink-500 dark:text-white dark:hover:text-pink-500"
                   >
                     {room.name}
                   </Typography>
@@ -108,7 +108,10 @@ export default function CardVoting({ room, mutate }) {
 
             <div className="flex items-center gap-6">
               <div className="inline-flex items-center gap-1">
-                <Typography color="gray" className="text-[12px] font-medium">
+                <Typography
+                  color="gray"
+                  className="text-[12px] font-medium dark:text-gray-500"
+                >
                   Kode voting:
                 </Typography>
                 <Typography variant="small" color="pink" className="font-bold">
@@ -131,7 +134,7 @@ export default function CardVoting({ room, mutate }) {
             >
               <IconButton
                 size="md"
-                className="bg-gray-200 text-xl text-gray-900"
+                className="bg-gray-200 text-xl text-gray-900 dark:bg-gray-900 dark:text-gray-500"
                 onClick={() => router.push(`/dashboard/edit/${room.id}`)}
               >
                 <HiOutlineCog />
@@ -166,26 +169,32 @@ export default function CardVoting({ room, mutate }) {
 
         <div className="flex items-center justify-between">
           <div className="grid gap-1">
-            <Typography color="gray" className="text-[12px] font-medium">
+            <Typography
+              color="gray"
+              className="text-[12px] font-medium dark:text-gray-500"
+            >
               Waktu mulai:
             </Typography>
             <Typography
               variant="h6"
               color="blue-gray"
-              className="max-w-[170px] font-bold"
+              className="max-w-[170px] font-bold dark:text-white"
             >
               {convertTime(room.start)}
             </Typography>
           </div>
 
           <div className="grid gap-1">
-            <Typography color="gray" className="text-[12px] font-medium">
+            <Typography
+              color="gray"
+              className="text-[12px] font-medium dark:text-gray-500"
+            >
               Waktu selesai:
             </Typography>
             <Typography
               variant="h6"
               color="blue-gray"
-              className="max-w-[170px] font-bold"
+              className="max-w-[170px] font-bold dark:text-white"
             >
               {convertTime(room.end)}
             </Typography>

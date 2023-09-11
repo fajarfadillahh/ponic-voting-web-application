@@ -48,7 +48,7 @@ export default function Dashboard(props) {
             <div className="justify-self-center text-center">
               <Typography
                 color="blue-gray"
-                className="max-w-[750px] text-[32px] font-extrabold capitalize sm:text-[48px]"
+                className="max-w-[750px] text-[32px] font-extrabold capitalize dark:text-white sm:text-[48px]"
               >
                 Pusat kontrol pemungutan suara online anda 🤖️
               </Typography>
@@ -58,7 +58,7 @@ export default function Dashboard(props) {
               <div className="grid gap-4">
                 <Typography
                   color="blue-gray"
-                  className="text-[20px] font-bold capitalize sm:text-[24px]"
+                  className="text-[20px] font-bold capitalize dark:text-white sm:text-[24px]"
                 >
                   List voting punya kamu
                 </Typography>
@@ -96,10 +96,10 @@ export default function Dashboard(props) {
 
               <div className="flex flex-wrap items-start justify-center gap-8 2xl:justify-start">
                 {rooms.data.length == 0 ? (
-                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
+                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200 dark:border-gray-900">
                     <Typography
                       color="gray"
-                      className="text-base font-semibold sm:text-[20px]"
+                      className="text-base font-semibold dark:text-white sm:text-[20px]"
                     >
                       Kamu belum punya voting nih 😚
                     </Typography>
@@ -111,10 +111,10 @@ export default function Dashboard(props) {
                     );
                   })
                 ) : (
-                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
+                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200 dark:border-gray-900">
                     <Typography
                       color="gray"
-                      className="text-base font-semibold sm:text-[20px]"
+                      className="text-base font-semibold dark:text-white sm:text-[20px]"
                     >
                       Voting yang dicari gak ada boss 😝
                     </Typography>
