@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
@@ -15,6 +16,7 @@ import useSWR from "swr";
 
 export default function Dashboard(props) {
   const router = useRouter();
+  const [search, setSearch] = useState("");
 
   const {
     data: rooms,
@@ -28,6 +30,10 @@ export default function Dashboard(props) {
   if (isLoading) {
     return <LoadingScreen />;
   }
+
+  const filteredRooms = rooms.data.filter((room) =>
+    room.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <>
@@ -61,6 +67,8 @@ export default function Dashboard(props) {
                   <Form
                     type="text"
                     placeholder="Cari voting yang sudah dibuat..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                     className="w-full"
                   />
 
@@ -96,12 +104,21 @@ export default function Dashboard(props) {
                       Kamu belum punya voting nih 😚
                     </Typography>
                   </div>
-                ) : (
-                  rooms.data.map((room, index) => {
+                ) : filteredRooms.length > 0 ? (
+                  filteredRooms.map((room, index) => {
                     return (
                       <CardVoting key={index} room={room} mutate={mutate} />
                     );
                   })
+                ) : (
+                  <div className="flex h-[300px] w-full items-center justify-center rounded-lg border-[4px] border-dashed border-gray-200">
+                    <Typography
+                      color="gray"
+                      className="text-base font-semibold sm:text-[20px]"
+                    >
+                      Voting yang dicari gak ada boss 😝
+                    </Typography>
+                  </div>
                 )}
               </div>
             </div>
