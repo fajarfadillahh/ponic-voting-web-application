@@ -16,8 +16,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="mx-auto mt-8 max-w-[1440px]">
-      <div className="container flex flex-col items-center gap-4 border-t-2 border-gray-200 py-8 text-center dark:border-blue-gray-800 md:flex-row md:justify-between md:text-left">
+    <footer className="mx-auto max-w-[1440px]">
+      <div className="dark:bg-gray-950 container flex flex-col items-center gap-4 border-t-2 border-gray-200 py-8 text-center dark:border-gray-900 md:flex-row md:justify-between md:text-left">
         <Typography
           variant="paragraph"
           color="blue-gray"

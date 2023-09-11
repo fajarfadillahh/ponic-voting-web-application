@@ -24,7 +24,7 @@ export default function Layout({ children, className }) {
       {hideNavbar && <Navbar />}
 
       <main
-        className={`mx-auto min-h-screen max-w-[1440px] overflow-hidden ${className}`}
+        className={`dark:bg-gray-950 mx-auto min-h-screen max-w-[1440px] overflow-hidden ${className}`}
       >
         {children}
       </main>

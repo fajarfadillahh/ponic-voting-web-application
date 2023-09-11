@@ -11,8 +11,13 @@ module.exports = withMT({
     fontFamily: {
       sans: ["Figtree", "sans-serif"],
     },
-
-    extend: {},
+    extend: {
+      colors: {
+        gray: {
+          950: "#121214",
+        },
+      },
+    },
   },
   plugins: [require("@tailwindcss/line-clamp")],
 });
