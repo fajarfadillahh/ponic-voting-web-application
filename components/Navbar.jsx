@@ -22,23 +22,31 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-[1440px] bg-white">
+    <nav className="dark:bg-gray-950 fixed inset-x-0 top-0 z-50 mx-auto max-w-[1440px] bg-white">
       <div className="container flex h-24 items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2">
           <Image src="/assets/icon.svg" alt="icon" width={36} height={36} />
-          <Typography variant="h5" color="blue-gray" className="font-extrabold">
+          <Typography
+            variant="h5"
+            color="blue-gray"
+            className="font-extrabold dark:text-white"
+          >
             Ponic<span className="text-pink-500">.</span>
           </Typography>
         </Link>
 
         <div
-          className={`fixed inset-x-0 top-24 flex w-full origin-top flex-col items-center gap-4 bg-white px-6 py-8 shadow-[0_4px_8px_rgba(0,0,0,0.05)] transition sm:static sm:top-0 sm:w-auto sm:scale-y-100 sm:flex-row sm:bg-transparent sm:p-0 sm:shadow-none ${
+          className={`dark:bg-gray-950 fixed inset-x-0 top-24 flex w-full origin-top flex-col items-center gap-4 bg-white px-6 py-8 shadow-[0_4px_8px_rgba(0,0,0,0.05)] transition sm:static sm:top-0 sm:w-auto sm:scale-y-100 sm:flex-row sm:bg-transparent sm:p-0 sm:shadow-none ${
             navbarOpen ? "scale-y-100" : "scale-y-0"
           }`}
         >
-          <span className="font-semibold text-gray-900">
+          <Typography
+            variant="paragraph"
+            color="blue-gray"
+            className="font-semibold dark:text-white"
+          >
             {fullname ? fullname : null}
-          </span>
+          </Typography>
 
           {!token ? (
             <Button
@@ -69,7 +77,7 @@ export default function Navbar() {
           size="sm"
           variant="outlined"
           color="gray"
-          className="sm:hidden"
+          className="dark:text-white sm:hidden"
           onClick={() => setNavbarOpen(!navbarOpen)}
         >
           <HiMenuAlt2 className="text-[1.2rem]" />
