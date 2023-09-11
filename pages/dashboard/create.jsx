@@ -79,7 +79,12 @@ export default function CreateVoting() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
+      const response = error.response;
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   };
 

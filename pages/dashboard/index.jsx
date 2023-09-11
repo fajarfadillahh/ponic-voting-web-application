@@ -126,7 +126,7 @@ export async function getServerSideProps({ req }) {
   } catch (error) {
     return {
       redirect: {
-        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+        destination: `/ups?code=${error.response.status}`,
       },
     };
   }

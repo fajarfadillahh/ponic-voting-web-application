@@ -11,6 +11,7 @@ import Form from "@/components/Form";
 // import utils
 import fetcher from "@/utils/fetcher";
 import LoadingButton from "@/components/Loading/LoadingButton";
+import toast from "@/utils/toast";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -41,7 +42,12 @@ export default function Register() {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
+      const response = error.response;
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   }
 

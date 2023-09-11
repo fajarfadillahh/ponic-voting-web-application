@@ -82,7 +82,18 @@ export default function EditVoting({ rooms }) {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
+      const response = error.response;
+
+      if (response.status == 500) {
+        return response.data.errors.map((error) => {
+          toast(messages[error.code], "error");
+        });
+      }
+
+      response.data.errors.map((error) => {
+        toast(error.message, "error");
+      });
     }
   };
 
@@ -292,7 +303,7 @@ export async function getServerSideProps({ params, req }) {
 
     return {
       redirect: {
-        destination: `/ups?code=${error.response.status}&message=${error.response.statusText}`,
+        destination: `/ups?code=${error.response.status}`,
       },
     };
   }
