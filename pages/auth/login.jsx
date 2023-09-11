@@ -74,14 +74,14 @@ export default function Login() {
             <Typography
               variant="h2"
               color="blue-gray"
-              className="mb-3 font-extrabold capitalize"
+              className="mb-3 font-extrabold capitalize dark:text-white"
             >
               Hi, Selamat datang kembali. 👏
             </Typography>
             <Typography
               variant="paragraph"
               color="gray"
-              className="font-medium"
+              className="font-medium dark:text-white"
             >
               Ayo masuk dulu, biar ketahuan kamu milih siapa.
             </Typography>
@@ -104,7 +104,7 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
-                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300"
+                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800"
                     onClick={handleShowPassword}
                   >
                     {icon}
@@ -130,7 +130,7 @@ export default function Login() {
             <Typography
               variant="paragraph"
               color="gray"
-              className="text-center font-medium"
+              className="text-center font-medium dark:text-white"
             >
               Belum punya akun? Klik{" "}
               <Link

@@ -78,14 +78,14 @@ export default function Register() {
             <Typography
               variant="h2"
               color="blue-gray"
-              className="mb-3 font-extrabold capitalize"
+              className="mb-3 font-extrabold capitalize dark:text-white"
             >
               Selamat datang di Ponic. 🤩
             </Typography>
             <Typography
               variant="paragraph"
               color="gray"
-              className="font-medium"
+              className="font-medium dark:text-white"
             >
               Silakan buat akun terlebih dahulu, sebelum kamu mulai voting.
             </Typography>
@@ -114,7 +114,7 @@ export default function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div
-                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300"
+                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800"
                     onClick={handleShowPassword}
                   >
                     {icon}
@@ -140,7 +140,7 @@ export default function Register() {
             <Typography
               variant="paragraph"
               color="gray"
-              className="text-center font-medium"
+              className="text-center font-medium dark:text-white"
             >
               Sudah punya akun? Klik{" "}
               <Link
