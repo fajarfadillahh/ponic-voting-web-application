@@ -96,7 +96,7 @@ export default function Voting(props) {
             <div className="grid gap-6 justify-self-center text-center">
               <Typography
                 color="blue-gray"
-                className="mx-auto max-w-[920px] text-[32px] font-extrabold capitalize sm:text-[48px]"
+                className="mx-auto max-w-[920px] text-[32px] font-extrabold capitalize dark:text-white sm:text-[48px]"
               >
                 {rooms.data.name}
               </Typography>
@@ -148,7 +148,7 @@ export default function Voting(props) {
                   <Typography
                     variant="h5"
                     color="red"
-                    className="rounded-xl bg-red-50 px-4 py-2 font-bold"
+                    className="rounded-xl bg-red-500 px-4 py-2 font-bold dark:bg-red-50/20"
                   >
                     Note: Kesempatan buat vote cuma 1 kali yaaa 😁
                   </Typography>

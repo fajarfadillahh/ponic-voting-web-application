@@ -4,6 +4,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
+import { useTheme } from "next-themes";
 
 // import components
 import Layout from "@/components/Layout";
@@ -14,6 +15,7 @@ import messages from "@/utils/messages";
 export default function Participant() {
   const [code, setCode] = useState("");
   const router = useRouter();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (router.query.code) {
@@ -33,7 +35,7 @@ export default function Participant() {
         <section className="pb-16 pt-40">
           <div className="container grid gap-12">
             <Image
-              src="/assets/img-5.svg"
+              src={`/assets/img-${theme == "dark" ? "5-white" : "5"}.svg`}
               width={400}
               height={330}
               alt="img"
@@ -44,14 +46,14 @@ export default function Participant() {
               <div className="text-center">
                 <Typography
                   color="blue-gray"
-                  className="mb-2 text-[32px] font-extrabold capitalize sm:text-[48px]"
+                  className="mb-2 text-[32px] font-extrabold capitalize dark:text-white sm:text-[48px]"
                 >
                   Ayo, ikutan voting 🚀
                 </Typography>
                 <Typography
                   variant="paragraph"
                   color="gray"
-                  className="font-medium"
+                  className="font-medium dark:text-white"
                 >
                   Masukan kode voting yang telah diberikan oleh
                   panitia/penyelenggara.
