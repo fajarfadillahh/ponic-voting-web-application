@@ -16,15 +16,15 @@ export default function Footer() {
   }
 
   return (
-    <footer className="dark:bg-gray-950 mx-auto max-w-[1440px]">
+    <footer className="mx-auto max-w-[1440px] dark:bg-gray-950">
       <div className="container flex flex-col items-center gap-4 border-t-2 border-gray-200 py-8 text-center dark:border-gray-900 md:flex-row md:justify-between md:text-left">
         <Typography
           variant="paragraph"
           color="blue-gray"
           className="font-semibold dark:text-white"
         >
-          &copy; Hak cipta {new Date().getFullYear()} Ponic. - Di kembangkan
-          oleh <span className="font-extrabold text-pink-500">Fglabs.</span> ❤️
+          &copy; Ponic. {new Date().getFullYear()} - Develop by{" "}
+          <span className="font-extrabold text-pink-500">Fglabs.</span> ❤️
         </Typography>
 
         <div className="inline-flex items-center gap-2">
