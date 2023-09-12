@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
-// import material-components
+import { useTheme } from "next-themes";
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
@@ -14,6 +13,7 @@ import messages from "@/utils/messages";
 import { useEffect } from "react";
 
 export default function SomethingWrong() {
+  const { theme } = useTheme();
   const router = useRouter();
 
   const { code } = router.query;
@@ -34,7 +34,7 @@ export default function SomethingWrong() {
         <section className="pb-16 pt-40">
           <div className="container grid gap-12">
             <Image
-              src="/assets/img-3.svg"
+              src={`/assets/img-${theme == "dark" ? "3-white" : "3"}.svg`}
               alt="hero img"
               width={350}
               height={395}

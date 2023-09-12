@@ -2,8 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi";
 import { useRouter } from "next/router";
-
-// import material-components
+import { useTheme } from "next-themes";
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
@@ -11,6 +10,7 @@ import Layout from "@/components/Layout";
 
 export default function Home() {
   const router = useRouter();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function Home() {
             </div>
 
             <Image
-              src="/assets/img-1.svg"
+              src={`/assets/img-${theme == "dark" ? "1-white" : "1"}.svg`}
               alt="hero img"
               width={580}
               height={475}

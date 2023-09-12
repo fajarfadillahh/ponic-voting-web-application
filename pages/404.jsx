@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
-// import material-components
+import { useTheme } from "next-themes";
 import { Button, Typography } from "@material-tailwind/react";
 
 // import components
@@ -10,6 +9,7 @@ import Layout from "@/components/Layout";
 
 export default function NotFound() {
   const router = useRouter();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function NotFound() {
         <section className="pb-16 pt-40">
           <div className="container grid gap-12">
             <Image
-              src="/assets/img-2.svg"
+              src={`/assets/img-${theme == "dark" ? "2-white" : "2"}.svg`}
               alt="hero img"
               width={500}
               height={300}
