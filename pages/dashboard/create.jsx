@@ -6,6 +6,7 @@ import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useTheme } from "next-themes";
 
 // reactflatpicr css
 import "flatpickr/dist/flatpickr.css";
@@ -24,6 +25,7 @@ import messages from "@/utils/messages";
 export default function CreateVoting() {
   const router = useRouter();
   const token = Cookies.get("token");
+  const { theme } = useTheme();
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -101,21 +103,21 @@ export default function CreateVoting() {
               <div>
                 <Typography
                   color="blue-gray"
-                  className="mb-2 text-[32px] font-extrabold capitalize sm:text-[48px]"
+                  className="mb-2 text-[32px] font-extrabold capitalize dark:text-white sm:text-[48px]"
                 >
                   Buat voting kamu <br /> sekarang 🙌
                 </Typography>
                 <Typography
                   variant="paragraph"
                   color="gray"
-                  className="mb-8 max-w-[380px] font-medium"
+                  className="mb-8 max-w-[380px] font-medium dark:text-white"
                 >
                   Pembuatan ruang voting yang sangat praktis dan gak ribet, jadi
                   buruan buat votingmu sekarang!
                 </Typography>
                 <Button
                   size="lg"
-                  color="gray"
+                  color="pink"
                   variant="text"
                   className="inline-flex items-center gap-1 text-base capitalize"
                   onClick={() => router.push("/dashboard")}
@@ -126,7 +128,7 @@ export default function CreateVoting() {
               </div>
 
               <Image
-                src="/assets/img-4.svg"
+                src={`/assets/img-${theme == "dark" ? "4-white" : "4"}.svg`}
                 width={580}
                 height={420}
                 alt="hero img"
@@ -139,7 +141,7 @@ export default function CreateVoting() {
                 <Typography
                   variant="h4"
                   color="blue-gray"
-                  className="font-bold capitalize"
+                  className="font-bold capitalize dark:text-white"
                 >
                   Detail voting
                 </Typography>
@@ -149,7 +151,7 @@ export default function CreateVoting() {
                     <Typography
                       variant="paragraph"
                       color="blue-gray"
-                      className="font-bold capitalize"
+                      className="font-bold capitalize dark:text-white"
                     >
                       Judul voting
                     </Typography>
@@ -166,7 +168,7 @@ export default function CreateVoting() {
                       <Typography
                         variant="paragraph"
                         color="blue-gray"
-                        className="w-full font-bold capitalize md:w-[280px]"
+                        className="w-full font-bold capitalize dark:text-white md:w-[280px]"
                       >
                         Waktu mulai
                       </Typography>
@@ -175,7 +177,7 @@ export default function CreateVoting() {
                         options={{ time_24hr: true, minDate: Date.now() }}
                         onClose={(date) => setStartDate(date[0].getTime())}
                         placeholder="Pilih waktu mulai"
-                        className="flatpickr-class"
+                        className="flatpickr-class dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-700"
                       />
                     </div>
 
@@ -183,7 +185,7 @@ export default function CreateVoting() {
                       <Typography
                         variant="paragraph"
                         color="blue-gray"
-                        className="w-full font-bold capitalize md:w-[280px]"
+                        className="w-full font-bold capitalize dark:text-white md:w-[280px]"
                       >
                         Waktu selesai
                       </Typography>
@@ -192,7 +194,7 @@ export default function CreateVoting() {
                         options={{ time_24hr: true, minDate: startDate }}
                         onClose={(date) => setEndDate(date[0].getTime())}
                         placeholder="Pilih waktu selesai"
-                        className="flatpickr-class"
+                        className="flatpickr-class dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-700"
                       />
                     </div>
                   </div>
@@ -203,7 +205,7 @@ export default function CreateVoting() {
                 <Typography
                   variant="h4"
                   color="blue-gray"
-                  className="font-bold capitalize"
+                  className="font-bold capitalize dark:text-white"
                 >
                   Kandidat / opsi
                 </Typography>
@@ -229,7 +231,7 @@ export default function CreateVoting() {
                     }}
                   >
                     <div
-                      className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white"
+                      className="flex aspect-square h-[64px] w-[64px] cursor-pointer items-center justify-center rounded-lg bg-gray-200 text-[2rem] text-gray-700 hover:bg-pink-500 hover:text-white dark:bg-gray-900 dark:text-gray-700 dark:hover:bg-pink-500 dark:hover:text-white"
                       onClick={() => addCandidateForm()}
                     >
                       <HiOutlinePlus />
