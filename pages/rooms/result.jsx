@@ -32,7 +32,7 @@ export default function Result({ room }) {
             <Image src="/assets/icon.svg" alt="icon" width={48} height={48} />
             <Typography
               color="blue-gray"
-              className="text-[32px] font-extrabold"
+              className="text-[32px] font-extrabold dark:text-white"
             >
               Ponic<span className="text-pink-500">.</span>
             </Typography>
@@ -43,13 +43,13 @@ export default function Result({ room }) {
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-2 font-medium"
+                className="mb-2 font-medium dark:text-gray-300"
               >
                 Pemenang pada voting ini adalah:
               </Typography>
               <Typography
                 color="blue-gray"
-                className="w-full border-b-4 border-pink-500 text-[56px] font-extrabold capitalize 2xl:w-[720px]"
+                className="w-full border-b-4 border-pink-500 text-[56px] font-extrabold capitalize dark:text-white 2xl:w-[720px]"
               >
                 &quot;{winner[0].name}&quot;
               </Typography>
@@ -59,7 +59,7 @@ export default function Result({ room }) {
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mb-2 max-w-[525px] font-medium"
+                className="mb-2 max-w-[525px] font-medium dark:text-gray-300"
               >
                 Terima kasih, telah berpartisipasi pada voting yang berjudul
                 dibawah ini, dan dilaksanakan pada{" "}
@@ -69,7 +69,7 @@ export default function Result({ room }) {
               </Typography>
               <Typography
                 color="blue-gray"
-                className="max-w-[580px] text-[28px] font-extrabold capitalize"
+                className="max-w-[580px] text-[28px] font-extrabold capitalize dark:text-white"
               >
                 &quot;{room.data.name}&quot;
               </Typography>

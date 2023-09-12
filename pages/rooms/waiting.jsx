@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Button, Typography } from "@material-tailwind/react";
+import { useTheme } from "next-themes";
 
 // import componrnts
 import Layout from "@/components/Layout";
@@ -14,6 +15,7 @@ import fetcher from "@/utils/fetcher";
 export default function Waiting({ room }) {
   const [distance, setDistance] = useState(room.data.start - Date.now());
   const router = useRouter();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,7 +38,7 @@ export default function Waiting({ room }) {
         <section className="pb-16 pt-40">
           <div className="container grid gap-12">
             <Image
-              src="/assets/img-6.svg"
+              src={`/assets/img-${theme == "dark" ? "6-white" : "6"}.svg`}
               alt="image"
               width={350}
               height={330}
@@ -46,14 +48,14 @@ export default function Waiting({ room }) {
             <div className="text-center">
               <Typography
                 color="blue-gray"
-                className="mb-3 text-[32px] font-extrabold capitalize sm:text-[36px]"
+                className="mb-3 text-[32px] font-extrabold capitalize dark:text-white sm:text-[36px]"
               >
                 Ehem, votingnya belum dimulai nih 😚
               </Typography>
               <Typography
                 variant="paragraph"
                 color="gray"
-                className="mx-auto mb-8 max-w-[550px] font-medium"
+                className="mx-auto mb-8 max-w-[550px] font-medium dark:text-white"
               >
                 Voting ini akan di mulai{" "}
                 <span className="font-extrabold text-pink-500">
