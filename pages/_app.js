@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import NextNProgress from "nextjs-progressbar";
 
 // import utils
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
@@ -12,6 +12,7 @@ import messages from "@/utils/messages";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     if (
@@ -28,6 +29,14 @@ export default function App({ Component, pageProps }) {
       });
     }
   }, [router.pathname]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return;
+  }
 
   return (
     <>
