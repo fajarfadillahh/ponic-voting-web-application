@@ -21,7 +21,6 @@ import messages from "@/utils/messages";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const token = Cookies.get("token");
@@ -36,14 +35,6 @@ export default function Voting(props) {
     refreshInterval: 10000,
     revalidateOnFocus: false,
   });
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return;
-  }
 
   if (isLoading) {
     return <LoadingScreen />;
