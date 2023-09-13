@@ -68,81 +68,90 @@ export default function Login() {
         <title>Silakan masuk dulu, biar ketahuan kamu milih siapa.</title>
       </Head>
 
-      <Layout className="flex items-center justify-center">
-        <section className="container grid gap-12">
-          <div className="text-center">
-            <Typography
-              variant="h2"
-              color="blue-gray"
-              className="mb-3 font-extrabold capitalize dark:text-white"
-            >
-              Hi, Selamat datang kembali. 👏
-            </Typography>
-            <Typography
-              variant="paragraph"
-              color="gray"
-              className="font-medium dark:text-white"
-            >
-              Ayo masuk dulu, biar ketahuan kamu milih siapa.
-            </Typography>
-          </div>
+      <Layout className="2xl:grid 2xl:grid-cols-2 2xl:items-center 2xl:justify-center">
+        <div className="hidden 2xl:relative 2xl:block 2xl:h-screen 2xl:bg-pink-500">
+          <img
+            src="/assets/img-aceent.svg"
+            alt="accent image"
+            className="absolute left-0 top-0 h-full w-full object-cover object-center"
+          />
+        </div>
 
-          <div className="mx-auto grid w-full max-w-[430px] gap-8">
-            <form className="grid w-full gap-8">
-              <div className="flex flex-col gap-3">
-                <Form
-                  type="email"
-                  placeholder="Alamat email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <div className="relative flex w-full items-center">
+        <div className="flex h-screen items-center justify-center">
+          <div className="container grid gap-12">
+            <div className="text-center">
+              <Typography
+                color="blue-gray"
+                className="mb-3 text-[32px] font-extrabold capitalize dark:text-white"
+              >
+                Hi, Selamat datang kembali. 👏
+              </Typography>
+              <Typography
+                variant="paragraph"
+                color="gray"
+                className="font-medium dark:text-white"
+              >
+                Ayo masuk dulu, biar ketahuan kamu milih siapa.
+              </Typography>
+            </div>
+
+            <div className="mx-auto grid w-full max-w-[430px] gap-8">
+              <form className="grid w-full gap-8">
+                <div className="flex flex-col gap-3">
                   <Form
-                    type={typePassword}
-                    placeholder="Kata sandi"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="email"
+                    placeholder="Alamat email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <div
-                    className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800"
-                    onClick={handleShowPassword}
-                  >
-                    {icon}
+                  <div className="relative flex w-full items-center">
+                    <Form
+                      type={typePassword}
+                      placeholder="Kata sandi"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div
+                      className="absolute right-6 cursor-pointer rounded-lg p-1 text-[1.3rem] text-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800"
+                      onClick={handleShowPassword}
+                    >
+                      {icon}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {isLoading ? (
-                <LoadingButton className="h-[52px] w-full" />
-              ) : (
-                <Button
-                  size="lg"
-                  color="pink"
-                  className="text-base capitalize"
-                  fullWidth
-                  onClick={handleLogin}
-                >
-                  Masuk
-                </Button>
-              )}
-            </form>
+                {isLoading ? (
+                  <LoadingButton className="h-[52px] w-full" />
+                ) : (
+                  <Button
+                    size="lg"
+                    color="pink"
+                    className="text-base capitalize"
+                    fullWidth
+                    onClick={handleLogin}
+                  >
+                    Masuk
+                  </Button>
+                )}
+              </form>
 
-            <Typography
-              variant="paragraph"
-              color="gray"
-              className="text-center font-medium dark:text-white"
-            >
-              Belum punya akun? Klik{" "}
-              <Link
-                href="/auth/register"
-                className="font-extrabold text-pink-500 underline"
+              <Typography
+                variant="paragraph"
+                color="gray"
+                className="text-center font-medium dark:text-white"
               >
-                disini
-              </Link>{" "}
-              untuk daftar
-            </Typography>
+                Belum punya akun? Klik{" "}
+                <Link
+                  href="/auth/register"
+                  className="font-extrabold text-pink-500 underline"
+                >
+                  disini
+                </Link>{" "}
+                untuk daftar
+              </Typography>
+            </div>
           </div>
-        </section>
+        </div>
       </Layout>
     </>
   );
