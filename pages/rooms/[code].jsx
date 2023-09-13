@@ -139,7 +139,7 @@ export default function Voting(props) {
                   <Typography
                     variant="h5"
                     color="red"
-                    className="rounded-xl bg-red-500 px-4 py-2 font-bold dark:bg-red-50/20"
+                    className="rounded-xl bg-red-100 px-4 py-2 font-bold text-red-500 dark:bg-red-50/20"
                   >
                     Note: Kesempatan buat vote cuma 1 kali yaaa 😁
                   </Typography>
