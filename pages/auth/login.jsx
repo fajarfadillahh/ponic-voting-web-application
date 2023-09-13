@@ -95,7 +95,7 @@ export default function Login() {
               </Typography>
             </div>
 
-            <div className="mx-auto grid w-full max-w-[430px] gap-8">
+            <div className="mx-auto grid w-full max-w-[380px] gap-8">
               <form className="grid w-full gap-8">
                 <div className="flex flex-col gap-3">
                   <Form
