@@ -18,9 +18,18 @@ export default function DeleteDialog({
   isLoading,
 }) {
   return (
-    <Dialog open={open} handler={handleOpen} size="xs">
+    <Dialog
+      open={open}
+      handler={handleOpen}
+      size="xs"
+      className="dark:bg-gray-950"
+    >
       <DialogHeader>
-        <Typography variant="h5" color="blue-gray" className="font-extrabold">
+        <Typography
+          variant="h5"
+          color="blue-gray"
+          className="font-extrabold dark:text-white"
+        >
           PERHATIAN
         </Typography>
       </DialogHeader>
@@ -29,7 +38,10 @@ export default function DeleteDialog({
         <Typography color="red" variant="h4" className="pb-2 pt-4 font-bold">
           Kamu harus baca ini!
         </Typography>
-        <Typography variant="paragraph" className="text-center font-medium">
+        <Typography
+          variant="paragraph"
+          className="text-center font-medium dark:text-gray-200"
+        >
           Dengan kamu mengeklik tombol hapus, data kamu akan terhapus permanen.
           Apakah kamu yakin ingin menghapusnya?
         </Typography>
@@ -39,7 +51,7 @@ export default function DeleteDialog({
           size="md"
           variant="text"
           color="blue-gray"
-          className="text-[14px] capitalize"
+          className="text-[14px] capitalize dark:bg-gray-900 dark:text-gray-200"
           onClick={handleOpen}
         >
           batal
