@@ -7,6 +7,7 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi";
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
+import { useState } from "react";
 
 // import components
 import Status from "@/components/Status";
@@ -15,7 +16,6 @@ import DeleteDialog from "@/components/DeleteDialog";
 // import utils
 import { convertTime } from "@/utils/convert";
 import fetcher from "@/utils/fetcher";
-import { useState } from "react";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
 
@@ -74,7 +74,7 @@ export default function CardVoting({ room, mutate }) {
       </Tooltip>
 
       <div className="grid gap-8">
-        <div className="inline-flex items-start justify-between">
+        <div className="inline-flex items-start justify-between gap-2">
           <div className="grid gap-3">
             <div className="max-w-[270px]">
               <Tooltip
@@ -106,20 +106,28 @@ export default function CardVoting({ room, mutate }) {
               </Tooltip>
             </div>
 
-            <div className="flex items-center gap-6">
-              <div className="inline-flex items-center gap-1">
+            <div className="flex items-start gap-8">
+              <div className="inline-flex flex-col gap-1">
                 <Typography
                   color="gray"
                   className="text-[12px] font-medium dark:text-gray-500"
                 >
                   Kode voting:
                 </Typography>
-                <Typography variant="small" color="pink" className="font-bold">
+                <Typography variant="h6" color="pink" className="font-bold">
                   {room.code}
                 </Typography>
               </div>
 
-              <Status start={room.start} end={room.end} />
+              <div className="inline-flex flex-col gap-1">
+                <Typography
+                  color="gray"
+                  className="text-[12px] font-medium dark:text-gray-500"
+                >
+                  Status voting:
+                </Typography>
+                <Status start={room.start} end={room.end} />
+              </div>
             </div>
           </div>
 
@@ -158,6 +166,7 @@ export default function CardVoting({ room, mutate }) {
                 <HiOutlineTrash />
               </IconButton>
             </Tooltip>
+
             <DeleteDialog
               open={open}
               handleOpen={() => setOpen(!open)}

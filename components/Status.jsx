@@ -29,7 +29,7 @@ export default function Status({ start, end }) {
   }, [start, end]);
 
   let baseStyle =
-    "inline-flex rounded-md px-3 py-0.5 text-[12px] font-bold uppercase";
+    "inline-flex justify-center rounded-md px-2 py-0.5 text-[14px] font-bold uppercase";
 
   if (status == "selesai") {
     return (
