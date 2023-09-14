@@ -21,6 +21,7 @@ import fetcher from "@/utils/fetcher";
 import LoadingButton from "@/components/Loading/LoadingButton";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
+import { Indonesian } from "flatpickr/dist/l10n/id.js";
 
 export default function CreateVoting() {
   const router = useRouter();
@@ -174,8 +175,25 @@ export default function CreateVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true, minDate: Date.now() }}
-                        onClose={(date) => setStartDate(date[0].getTime())}
+                        options={{
+                          time_24hr: true,
+                          minDate: Date.now(),
+                          altInput: true,
+                          altFormat: "l d/m/Y H:i",
+                          locale: {
+                            ...Indonesian,
+                          },
+                        }}
+                        onClose={(date) => {
+                          if (date.length == 0) {
+                            return toast(
+                              "silahkan pilih waktu mulai 😄",
+                              "error",
+                            );
+                          }
+
+                          setStartDate(date[0].getTime());
+                        }}
                         placeholder="Pilih waktu mulai"
                         className="flatpickr-class dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-700"
                       />
@@ -191,8 +209,24 @@ export default function CreateVoting() {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true, minDate: startDate }}
-                        onClose={(date) => setEndDate(date[0].getTime())}
+                        options={{
+                          time_24hr: true,
+                          minDate: startDate,
+                          altInput: true,
+                          altFormat: "l d/m/Y H:i",
+                          locale: {
+                            ...Indonesian,
+                          },
+                        }}
+                        onClose={(date) => {
+                          if (date.length == 0) {
+                            return toast(
+                              "silahkan pilih waktu selesai 😄",
+                              "error",
+                            );
+                          }
+                          setEndDate(date[0].getTime());
+                        }}
                         placeholder="Pilih waktu selesai"
                         className="flatpickr-class dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-700"
                       />

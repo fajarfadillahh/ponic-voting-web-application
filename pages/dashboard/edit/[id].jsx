@@ -21,6 +21,7 @@ import fetcher from "@/utils/fetcher";
 import LoadingButton from "@/components/Loading/LoadingButton";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
+import { Indonesian } from "flatpickr/dist/l10n/id.js";
 
 export default function EditVoting({ rooms }) {
   const router = useRouter();
@@ -184,7 +185,15 @@ export default function EditVoting({ rooms }) {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true, minDate: Date.now() }}
+                        options={{
+                          time_24hr: true,
+                          minDate: Date.now(),
+                          altInput: true,
+                          altFormat: "l d/m/Y H:i",
+                          locale: {
+                            ...Indonesian,
+                          },
+                        }}
                         value={
                           startFromData > Date.now()
                             ? startFromData
@@ -206,7 +215,15 @@ export default function EditVoting({ rooms }) {
                       </Typography>
                       <Flatpickr
                         data-enable-time
-                        options={{ time_24hr: true, minDate: startFromInput }}
+                        options={{
+                          time_24hr: true,
+                          minDate: startFromInput,
+                          altInput: true,
+                          altFormat: "l d/m/Y H:i",
+                          locale: {
+                            ...Indonesian,
+                          },
+                        }}
                         value={endFromInput ? endFromInput : endFromData}
                         onClose={(date) => setEndFromInput(date[0].getTime())}
                         placeholder="Pilih waktu mulai"
