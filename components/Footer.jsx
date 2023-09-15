@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
 import { IconButton, Typography } from "@material-tailwind/react";
 
 export default function Footer() {
@@ -38,13 +37,12 @@ export default function Footer() {
 
           <IconButton
             size="sm"
-            variant="outlined"
-            className="text-[1rem] dark:text-white"
+            className="bg-gray-100 text-[1rem] shadow-none hover:bg-gray-200 hover:shadow-none dark:bg-gray-900 dark:hover:bg-gray-800"
             onClick={() =>
               theme == "dark" ? setTheme("light") : setTheme("dark")
             }
           >
-            {theme == "light" ? <HiOutlineMoon /> : <HiOutlineSun />}
+            {theme == "light" ? "🌙" : "☀️"}
           </IconButton>
         </div>
       </div>
