@@ -94,6 +94,10 @@ export default function EditVoting({ rooms }) {
         });
       }
 
+      if (response.status == 403) {
+        return router.push("/dashboard");
+      }
+
       response.data.errors.map((error) => {
         toast(error.message, "error");
       });
@@ -305,6 +309,17 @@ export async function getServerSideProps({ params, req }) {
     );
 
     if (data.success) {
+      const start = data.data.start;
+      const end = data.data.end;
+
+      if (Date.now() > start || Date.now() > end) {
+        return {
+          redirect: {
+            destination: "/dashboard",
+          },
+        };
+      }
+
       return {
         props: {
           rooms: data,

@@ -1,33 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 
-// import utils
-import { useState, useEffect } from "react";
-
-export default function Status({ start, end }) {
-  const [status, setStatus] = useState(() => {
-    if (Date.now() < start) {
-      return "menunggu";
-    } else if (Date.now() > end) {
-      return "selesai";
-    } else if (Date.now() > start) {
-      return "berjalan";
-    }
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (Date.now() < start) {
-        setStatus("menunggu");
-      } else if (Date.now() > end) {
-        setStatus("selesai");
-      } else if (Date.now() > start) {
-        setStatus("berjalan");
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [start, end]);
-
+export default function Status({ status }) {
   let baseStyle =
     "inline-flex justify-center rounded-md px-2 py-0.5 text-[14px] font-bold uppercase";
 

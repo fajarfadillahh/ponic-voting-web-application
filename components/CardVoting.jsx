@@ -7,7 +7,7 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi";
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // import components
 import Status from "@/components/Status";
@@ -24,6 +24,30 @@ export default function CardVoting({ room, mutate }) {
   const [isLoading, setIsLoading] = useState(false);
   const token = Cookies.get("token");
   const router = useRouter();
+
+  const [status, setStatus] = useState(() => {
+    if (Date.now() < room.start) {
+      return "menunggu";
+    } else if (Date.now() > room.end) {
+      return "selesai";
+    } else if (Date.now() > room.start) {
+      return "berjalan";
+    }
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (Date.now() < room.start) {
+        setStatus("menunggu");
+      } else if (Date.now() > room.end) {
+        setStatus("selesai");
+      } else if (Date.now() > room.start) {
+        setStatus("berjalan");
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [room.start, room.end]);
 
   const handleDeleteVoting = async (room_id, code) => {
     try {
@@ -126,28 +150,30 @@ export default function CardVoting({ room, mutate }) {
                 >
                   Status voting:
                 </Typography>
-                <Status start={room.start} end={room.end} />
+                <Status status={status} />
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
-            <Tooltip
-              content="Edit voting"
-              placement="top"
-              animate={{
-                mount: { scale: 1, y: 0 },
-                unmount: { scale: 0, y: 25 },
-              }}
-            >
-              <IconButton
-                size="md"
-                className="bg-gray-200 text-xl text-gray-900 dark:bg-gray-900 dark:text-gray-500"
-                onClick={() => router.push(`/dashboard/edit/${room.id}`)}
+            {status == "berjalan" || status == "selesai" ? null : (
+              <Tooltip
+                content="Edit voting"
+                placement="top"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
               >
-                <HiOutlineCog />
-              </IconButton>
-            </Tooltip>
+                <IconButton
+                  size="md"
+                  className="bg-gray-200 text-xl text-gray-900 dark:bg-gray-900 dark:text-gray-500"
+                  onClick={() => router.push(`/dashboard/edit/${room.id}`)}
+                >
+                  <HiOutlineCog />
+                </IconButton>
+              </Tooltip>
+            )}
 
             <Tooltip
               content="Hapus voting"
