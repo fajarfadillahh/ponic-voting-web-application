@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import Image from "next/image";
 import { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
@@ -70,10 +71,12 @@ export default function Login() {
 
       <Layout className="2xl:grid 2xl:grid-cols-2 2xl:items-center 2xl:justify-center">
         <div className="hidden 2xl:relative 2xl:block 2xl:h-screen 2xl:bg-pink-500">
-          <img
+          <Image
             src="/assets/img-aceent.svg"
             alt="accent image"
             className="absolute left-0 top-0 h-full w-full object-cover object-center"
+            fill={true}
+            priority={true}
           />
         </div>
 
