@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { IconButton, Typography } from "@material-tailwind/react";
 
 export default function Footer() {
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <footer className="mx-auto max-w-[1440px] dark:bg-gray-950">
@@ -23,7 +13,7 @@ export default function Footer() {
           className="font-semibold dark:text-white"
         >
           &copy; Ponic. {new Date().getFullYear()} - Develop by{" "}
-          <span className="font-extrabold text-pink-500">Fglabs.</span> ❤️
+          <span className="font-extrabold text-pink-500">FGlabs.</span> ❤️
         </Typography>
 
         <div className="inline-flex items-center gap-2">
