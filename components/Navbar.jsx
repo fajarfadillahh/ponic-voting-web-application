@@ -31,13 +31,15 @@ export default function Navbar() {
             navbarOpen ? "scale-y-100" : "scale-y-0"
           }`}
         >
-          <Typography
-            variant="paragraph"
-            color="blue-gray"
-            className="font-semibold dark:text-white"
-          >
-            {fullname ? fullname : null}
-          </Typography>
+          {fullname ? (
+            <Typography
+              variant="paragraph"
+              color="blue-gray"
+              className="font-semibold dark:text-white"
+            >
+              {fullname}
+            </Typography>
+          ) : null}
 
           {!token ? (
             <Button
