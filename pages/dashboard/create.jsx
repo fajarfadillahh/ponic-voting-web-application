@@ -211,7 +211,7 @@ export default function CreateVoting() {
                         data-enable-time
                         options={{
                           time_24hr: true,
-                          minDate: startDate,
+                          minDate: startDate + 60 * 5 * 1000,
                           altInput: true,
                           altFormat: "l d/m/Y H:i",
                           locale: {
