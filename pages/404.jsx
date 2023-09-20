@@ -27,6 +27,7 @@ export default function NotFound() {
               width={500}
               height={300}
               className="justify-self-center"
+              priority={true}
             />
 
             <div className="text-center">

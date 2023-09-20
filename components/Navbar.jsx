@@ -16,7 +16,13 @@ export default function Navbar() {
     <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-[1440px] bg-white dark:bg-gray-950">
       <div className="container flex h-24 items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2">
-          <Image src="/assets/icon.svg" alt="icon" width={36} height={36} />
+          <Image
+            src="/assets/icon.svg"
+            alt="icon"
+            width={36}
+            height={36}
+            priority={true}
+          />
           <Typography
             variant="h5"
             color="blue-gray"

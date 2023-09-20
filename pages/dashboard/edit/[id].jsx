@@ -147,6 +147,7 @@ export default function EditVoting({ rooms }) {
                 height={420}
                 alt="hero img"
                 className="hidden lg:block"
+                priority={true}
               />
             </div>
 

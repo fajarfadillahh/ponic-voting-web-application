@@ -69,6 +69,7 @@ export default function Home() {
               width={580}
               height={475}
               className="justify-self-center"
+              priority={true}
             />
           </div>
         </section>

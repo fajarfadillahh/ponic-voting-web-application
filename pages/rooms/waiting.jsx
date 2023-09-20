@@ -43,6 +43,7 @@ export default function Waiting({ room }) {
               width={350}
               height={330}
               className="justify-self-center"
+              priority={true}
             />
 
             <div className="text-center">

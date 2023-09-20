@@ -40,6 +40,7 @@ export default function Participant() {
               height={330}
               alt="img"
               className="block justify-self-center"
+              priority={true}
             />
 
             <div className="grid gap-8">

@@ -39,6 +39,7 @@ export default function SomethingWrong() {
               width={350}
               height={395}
               className="justify-self-center"
+              priority={true}
             />
 
             <div className="text-center">

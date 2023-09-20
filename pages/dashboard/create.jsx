@@ -134,6 +134,7 @@ export default function CreateVoting() {
                 height={420}
                 alt="hero img"
                 className="hidden lg:block"
+                priority={true}
               />
             </div>
 

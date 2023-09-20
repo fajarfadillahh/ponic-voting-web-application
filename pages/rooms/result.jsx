@@ -29,7 +29,13 @@ export default function Result({ room }) {
 
         <section className="container relative grid gap-24">
           <div className="inline-flex items-center gap-2 justify-self-center">
-            <Image src="/assets/icon.svg" alt="icon" width={48} height={48} />
+            <Image
+              src="/assets/icon.svg"
+              alt="icon"
+              width={48}
+              height={48}
+              priority={true}
+            />
             <Typography
               color="blue-gray"
               className="text-[32px] font-extrabold dark:text-white"
