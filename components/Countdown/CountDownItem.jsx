@@ -1,6 +1,5 @@
+// import components
 import { zeroPad } from "react-countdown";
-
-// import material-components
 import { Typography } from "@material-tailwind/react";
 
 export default function CountDownItem({ label, value }) {

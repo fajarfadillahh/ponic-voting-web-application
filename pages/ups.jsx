@@ -1,16 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-import { Button, Typography } from "@material-tailwind/react";
-
 // import components
 import Layout from "@/components/Layout";
+import Head from "next/head";
+import Image from "next/image";
+import { Button, Typography } from "@material-tailwind/react";
 
 // import utils
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 
 export default function SomethingWrong() {
   const { theme } = useTheme();

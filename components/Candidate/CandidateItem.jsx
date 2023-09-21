@@ -1,3 +1,4 @@
+// import components
 import { HiCheck } from "react-icons/hi";
 import { Progress, Typography } from "@material-tailwind/react";
 

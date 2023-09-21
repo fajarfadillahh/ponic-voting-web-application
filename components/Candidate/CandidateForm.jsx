@@ -1,7 +1,6 @@
+// import components
 import { HiOutlineX } from "react-icons/hi";
 import { Typography, Tooltip } from "@material-tailwind/react";
-
-// import components
 import Form from "@/components/Form";
 
 export default function CandidateForm({

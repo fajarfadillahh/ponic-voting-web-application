@@ -1,9 +1,6 @@
-import Countdown from "react-countdown";
-
-// import material-components
-import { Typography } from "@material-tailwind/react";
-
 // import components
+import Countdown from "react-countdown";
+import { Typography } from "@material-tailwind/react";
 import CountDownRenderer from "@/components/Countdown/CountDownRenderer";
 
 export default function CountDown({ className, end, handleComplete }) {

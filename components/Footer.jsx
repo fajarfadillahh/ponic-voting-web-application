@@ -1,5 +1,8 @@
-import { useTheme } from "next-themes";
+// import components
 import { IconButton, Typography } from "@material-tailwind/react";
+
+// import utils
+import { useTheme } from "next-themes";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();

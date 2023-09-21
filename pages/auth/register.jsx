@@ -1,19 +1,18 @@
-import Head from "next/head";
-import Link from "next/link";
-import Cookies from "js-cookie";
-import Image from "next/image";
-import { useState } from "react";
-import { Button, Typography } from "@material-tailwind/react";
-import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
-
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import LoadingButton from "@/components/Loading/LoadingButton";
+import { Button, Typography } from "@material-tailwind/react";
+import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
 // import utils
 import fetcher from "@/utils/fetcher";
 import toast from "@/utils/toast";
+import Cookies from "js-cookie";
+import { useState } from "react";
 
 export default function Register() {
   const [email, setEmail] = useState("");

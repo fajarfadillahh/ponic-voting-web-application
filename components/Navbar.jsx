@@ -1,10 +1,13 @@
+// import components
 import Image from "next/image";
 import Link from "next/link";
+import { HiMenuAlt2 } from "react-icons/hi";
+import { Button, IconButton, Typography } from "@material-tailwind/react";
+
+// import utils
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { HiMenuAlt2 } from "react-icons/hi";
-import { Button, IconButton, Typography } from "@material-tailwind/react";
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);

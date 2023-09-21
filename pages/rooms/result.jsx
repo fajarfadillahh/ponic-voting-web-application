@@ -1,14 +1,13 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { Button, Typography } from "@material-tailwind/react";
-
 // import components
 import Layout from "@/components/Layout";
+import Head from "next/head";
+import Image from "next/image";
+import { Button, Typography } from "@material-tailwind/react";
 
 // import utils
 import fetcher from "@/utils/fetcher";
 import { convertTime } from "@/utils/convert";
+import { useRouter } from "next/router";
 
 export default function Result({ room }) {
   const router = useRouter();

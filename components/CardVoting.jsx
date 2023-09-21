@@ -1,23 +1,22 @@
-import Link from "next/link";
-import Cookies from "js-cookie";
-import { useRouter } from "next/router";
+// import components
 import {
   HiOutlineCog,
   HiOutlineExternalLink,
   HiOutlineTrash,
 } from "react-icons/hi";
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { useState, useEffect } from "react";
-
-// import components
 import Status from "@/components/Status";
 import DeleteDialog from "@/components/DeleteDialog";
+import Link from "next/link";
 
 // import utils
 import { convertTime } from "@/utils/convert";
 import fetcher from "@/utils/fetcher";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function CardVoting({ room, mutate }) {
   const [open, setOpen] = useState(false);

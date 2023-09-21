@@ -1,16 +1,15 @@
+// import components
+import Layout from "@/components/Layout";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { Button, Typography } from "@material-tailwind/react";
-import { useTheme } from "next-themes";
-
-// import componrnts
-import Layout from "@/components/Layout";
 
 // import utils
 import { convertTime } from "@/utils/convert";
 import { useState, useEffect } from "react";
 import fetcher from "@/utils/fetcher";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 
 export default function Waiting({ room }) {
   const [distance, setDistance] = useState(room.data.start - Date.now());

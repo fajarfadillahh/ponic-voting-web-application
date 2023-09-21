@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
-
 // import components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+// import utils
+import { useRouter } from "next/router";
 
 export default function Layout({ children, className }) {
   const router = useRouter();

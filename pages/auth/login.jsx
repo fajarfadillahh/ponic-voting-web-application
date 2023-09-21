@@ -1,19 +1,18 @@
-import Head from "next/head";
-import Link from "next/link";
-import Cookies from "js-cookie";
-import Image from "next/image";
-import { useState } from "react";
-import { Button, Typography } from "@material-tailwind/react";
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
-
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import LoadingButton from "@/components/Loading/LoadingButton";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import { Button, Typography } from "@material-tailwind/react";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 // import utils
 import fetcher from "@/utils/fetcher";
 import toast from "@/utils/toast";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");

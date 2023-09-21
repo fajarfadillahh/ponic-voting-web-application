@@ -1,27 +1,26 @@
-import Head from "next/head";
-import Image from "next/image";
-import Flatpickr from "react-flatpickr";
-import Cookies from "js-cookie";
-import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useTheme } from "next-themes";
-
-// reactflatpicr css
+// reactflatpickr css
 import "flatpickr/dist/flatpickr.css";
 
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CandidateForm from "@/components/Candidate/CandidateForm";
+import LoadingButton from "@/components/Loading/LoadingButton";
+import Head from "next/head";
+import Image from "next/image";
+import Flatpickr from "react-flatpickr";
+import { HiOutlineArrowLeft, HiOutlinePlus } from "react-icons/hi";
+import { Button, Tooltip, Typography } from "@material-tailwind/react";
 
 // import utils
 import fetcher from "@/utils/fetcher";
-import LoadingButton from "@/components/Loading/LoadingButton";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
 import { Indonesian } from "flatpickr/dist/l10n/id.js";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useTheme } from "next-themes";
+import Cookies from "js-cookie";
 
 export default function EditVoting({ rooms }) {
   const router = useRouter();

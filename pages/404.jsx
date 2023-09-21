@@ -1,11 +1,12 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-import { Button, Typography } from "@material-tailwind/react";
-
 // import components
 import Layout from "@/components/Layout";
+import { Button, Typography } from "@material-tailwind/react";
+import Head from "next/head";
+import Image from "next/image";
+
+// import utils
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 
 export default function NotFound() {
   const router = useRouter();

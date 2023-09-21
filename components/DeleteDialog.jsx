@@ -1,3 +1,4 @@
+// import components
 import {
   Button,
   Dialog,
@@ -7,8 +8,6 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { HiBell } from "react-icons/hi";
-
-// import components
 import LoadingButton from "@/components/Loading/LoadingButton";
 
 export default function DeleteDialog({

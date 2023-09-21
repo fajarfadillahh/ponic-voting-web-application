@@ -1,18 +1,17 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { Button, Typography } from "@material-tailwind/react";
-
 // import components
 import Layout from "@/components/Layout";
 import Form from "@/components/Form";
 import CardVoting from "@/components/CardVoting";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
+import { Button, Typography } from "@material-tailwind/react";
+import Head from "next/head";
 
 // import utils
 import fetcher from "@/utils/fetcher";
 import swrfetcher from "@/utils/swrfetcher";
 import useSWR from "swr";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Dashboard(props) {
   const router = useRouter();

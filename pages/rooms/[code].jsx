@@ -1,23 +1,22 @@
-import Head from "next/head";
-import Cookies from "js-cookie";
-import useSWR from "swr";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Button, Typography } from "@material-tailwind/react";
-
 // import components
 import Layout from "@/components/Layout";
 import CountDown from "@/components/Countdown/CountDown";
 import CandidateItem from "@/components/Candidate/CandidateItem";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
 import LoadingButton from "@/components/Loading/LoadingButton";
+import { HiOutlineArrowLeft } from "react-icons/hi";
+import { Button, Typography } from "@material-tailwind/react";
+import Head from "next/head";
 
 // import utils
 import fetcher from "@/utils/fetcher";
 import swrfetcher from "@/utils/swrfetcher";
 import toast from "@/utils/toast";
 import messages from "@/utils/messages";
+import Cookies from "js-cookie";
+import useSWR from "swr";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Voting(props) {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
