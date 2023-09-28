@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function fetcher(url, method, data = null, token = null) {
   const defaultObject = {
-    url: `https://api.ponic.site${url}`,
+    url: `https://ponic.cyclic.app/api/v1${url}`,
     method,
   };
 
