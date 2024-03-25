@@ -1,26 +1,24 @@
 import axios from "axios";
 
 async function fetcher(url, method, data = null, token = null) {
-  const defaultObject = {
-    url: `https://ponic.cyclic.app/api/v1${url}`,
+  const options = {
+    url: `https://api.ponic.site/api/v1${url}`,
     method,
   };
 
-  const config = {};
-
   if (data) {
-    Object.assign(config, defaultObject, { data });
+    Object.assign(options, { data });
   }
 
   if (token) {
-    Object.assign(config, defaultObject, {
+    Object.assign(options, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   }
 
-  return axios(config);
+  return axios(options);
 }
 
 export default fetcher;
